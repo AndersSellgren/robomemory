@@ -22,7 +22,8 @@ class App extends Component {
 	componentDidMount() {
 		fetch('https://jsonplaceholder.typicode.com/users')
 			.then(response => response.json())
-			.then(users => this.setState({robots: users}));
+			.then(users => this.setState({robots: users}))
+			.then(_ => console.log(this.state.robots));
 	}
 
 	// function expression makes this to always belong to the class where it was defined
@@ -38,7 +39,6 @@ class App extends Component {
 	render() {
 		const {robots, searchField } = this.state;
 		
-		// One coule define filteredRobots here, may be easier considering the this.
 		const filteredRobots = robots.filter(robot => {
 			return (robot.username.toLowerCase().startsWith(searchField.toLowerCase()))
 		})
@@ -46,14 +46,14 @@ class App extends Component {
 		return (!robots.length ? 
 			<h1> Loading </h1> :
 			(
-			<div className='tc'> 
-					<h1 style={{fontSize:'3rem'}}>RoboFriends</h1>
-					<SearchBox onSearchChange={this.onSearchChange} searchField={searchField}/>
-					<Scroll >
-						<ErrorBoundary>
-							<CardList filteredRobots={filteredRobots}/>
-						</ErrorBoundary>
-					</Scroll>
+				<div className='tc'> 
+						<h1 style={{fontSize:'3rem'}}>RoboFriends</h1>
+						<SearchBox onSearchChange={this.onSearchChange} searchField={searchField}/>
+						<Scroll >
+							<ErrorBoundary>
+								<CardList filteredRobots={filteredRobots}/>
+							</ErrorBoundary>
+						</Scroll>
 				</div>
 			)
 		)
