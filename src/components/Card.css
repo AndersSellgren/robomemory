@@ -1,5 +1,7 @@
-h2 {
+h2, h5 {
 	color: white;
+	/* padding: 0; */
+	/* margin: 0.5rem; */
 }
 
 p {

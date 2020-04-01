@@ -3,10 +3,6 @@ import Card from './Card';
 
 function CardList({filteredRobots}) {
 
-	// if (true) {
-	// 	throw new Error("Nooooo");
-	// }
-
 	return (
 		<div>
 			{

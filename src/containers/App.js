@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import CardList from '../components/CardList';
-import { robots } from '../robots';
+// import { robots } from '../robots';
 import Scroll from '../components/Scroll';
 import SearchBox from '../components/SearchBox';
 import './App.css'
@@ -20,22 +20,12 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		// fetch('https://jsonplaceholder.typicode.com/users')
-		// 	.then(response => response.json())
-		// 	.then(users => this.setState({robots: users}))
-		// 	.then(_ => console.log(this.state.robots));
-		this.setState({robots: robots})
+		fetch('https://jsonplaceholder.typicode.com/users')
+			.then(response => response.json())
+			.then(users => this.setState({robots: users}))
+			// .then(_ => console.log(this.state.robots));
+		// this.setState({robots: robots})
 	}
-
-	// function expression makes this to always belong to the class where it was defined
-	// It is possible to send this function to Cardlist and use it to filter the robots
-	// filterRobots = (robots) => {
-	// 	return (
-	// 		this.state.robots.filter(robot => {
-	// 			return (robot.username.toLowerCase().startsWith(this.state.searchField.toLowerCase()))
-	// 		})
-	// 	)
-	// } 
 
 	render() {
 		const {robots, searchField } = this.state;
