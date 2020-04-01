@@ -10,7 +10,6 @@ const Card = (props) => {
 			<div>
 				<h5> {props.username.substr(0,8)} </h5>
 			</div>
-			{/*<p> {email} </p>*/}
 		</div>
 	);
 };
