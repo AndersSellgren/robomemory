@@ -1,12 +1,12 @@
 import React from 'react';
 import Card from './Card';
 
-function CardList({filteredRobots}) {
+function CardList({robots}) {
 
 	return (
 		<div>
 			{
-				filteredRobots.map((robot) => {
+				robots.map((robot) => {
 					return (<Card 
 							key={robot.id} 
 							id={robot.id} 
