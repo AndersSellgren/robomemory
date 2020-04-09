@@ -5,6 +5,17 @@
     src: local('SEGA');
 }
 
-h1 {
-	font-family: "SEGA LOGO FONT";
+div h1 {
+    font-family: "SEGA LOGO FONT";
+    font-size: 3em;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    line-height: 10vh;
+    font-size: 2em;
+    margin: 0;
+    padding: 0;
+	/* font-family: "SEGA LOGO FONT"; */
 }

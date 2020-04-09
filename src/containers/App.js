@@ -5,6 +5,7 @@ import CardList from '../components/CardList';
 import Scroll from '../components/Scroll';
 import './App.css'
 import ErrorBoundary from './ErrorBoundary'
+import Header from './Header'
 
 
 let cardToCheck = null;
@@ -15,6 +16,8 @@ function App() {
 	const [robots, setRobots] = useState([]);
 	const [cards, setCards] = useState([])
 	const [matchedCards, setMatchedCards] = useState([])
+	const [seconds, setSeconds] = useState(0)
+	const [gameStarted, setGameStarted] = useState(false)
 
 	const showCards = () => {
 		cards.forEach(card => card.classList.add('visible'))
@@ -64,6 +67,9 @@ function App() {
 	}
 
 	const flipCard = (card) => {
+		if(!gameStarted) {
+			setGameStarted(true)
+		}
 		if(canFlipCard(card)) {
 			console.log(card)
 			// this.audioController.flip();
@@ -96,13 +102,12 @@ function App() {
 				cardMisMatch(card, cardToCheck);
 
 		cardToCheck = null;
-}
-	
+	}
+
 	const startGame = () => {
 		showCards()
 		// setCardToCheck(null);
 		// this.totalClicks = 0;
-		// this.timeRemaining = this.totalTime;
 		// matchedCards = [];
 		busy = true;
 		setTimeout(() => {
@@ -127,15 +132,6 @@ function App() {
 		const cardsArray = Array.from(document.querySelectorAll('.card'))
 		
 		if (robots.length) {
-			// for (const card of cardsArray) {
-			// 	card.addEventListener('click', () => {
-			// 		if(card.classList.contains("visible")) {
-			// 			card.classList.remove('visible');
-			// 		} else {
-			// 			card.classList.add('visible');
-			// 		}
-			// 	})
-			// }
 			for (const card of cardsArray) {
 				card.addEventListener('click', () => {
 					flipCard(card)
@@ -149,20 +145,27 @@ function App() {
 		startGame()
 	}, [cards])
 
-	useEffect(() => {
-		// startGame()
-	}, [flipCard])
+  useEffect(() => {
+		setSeconds(0)
+		if(gameStarted){
+			const interval = setInterval(() => {
+				setSeconds(seconds => seconds + 1);
+			}, 1000);
+			// componentWillUnmount
+			return () => clearInterval(interval);
+		}
+  }, [gameStarted]);
 
 	return (!robots.length ? 
 		<h1> Loading </h1> :
 		(
-			<div className='tc'> 
-					<h1 style={{fontSize:'2rem'}}>RoboMemory</h1>
-					<Scroll >
-						<ErrorBoundary>
-							<CardList robots={robots} />
-						</ErrorBoundary>
-					</Scroll>
+			<div>
+				<Header seconds={seconds} />
+				<Scroll >
+					<ErrorBoundary>
+						<CardList robots={robots} />
+					</ErrorBoundary>
+				</Scroll>
 			</div>
 		)
 	)

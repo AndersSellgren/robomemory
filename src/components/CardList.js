@@ -25,7 +25,8 @@ const divStyle = {
 	justifyContent: 'center',
 	gridTemplateColumns: 'repeat(6, 150px)',
 	gridTemplateRows: '200px 200px 200px',
-  gridGap: '0.1em',
+	gridGap: '1em',
+	// margin: '1em'
 }
 
 export default CardList;
