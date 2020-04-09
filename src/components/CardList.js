@@ -4,7 +4,7 @@ import Card from './Card';
 function CardList({robots}) {
 
 	return (
-		<div>
+		<div style={divStyle}>
 			{
 				robots.map((robot) => {
 					return (<Card 
@@ -18,6 +18,15 @@ function CardList({robots}) {
 		</div>
 	);
 };
+
+const divStyle = {
+	gridColumn: '1 / -1',
+	display: 'grid',
+	justifyContent: 'center',
+	gridTemplateColumns: 'repeat(6, 150px)',
+	gridTemplateRows: '200px 200px 200px',
+  gridGap: '0.1em',
+}
 
 export default CardList;
 
