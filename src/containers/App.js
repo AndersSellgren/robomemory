@@ -2,16 +2,17 @@
 import React, {useState, useEffect} from 'react';
 import CardList from '../components/CardList';
 // import { robots } from '../robots';
-import Victory from './Victory';
+import Victory from '../components/Victory';
+import StartPage from '../components/StartPage';
 import Scroll from '../components/Scroll';
 import './App.css'
 import ErrorBoundary from './ErrorBoundary'
-import Header from './Header'
+import Header from '../components/Header'
 
 let cardToCheck = null;
 let busy = true
 let matchedCards = []
-const numRobots = 1
+const numRobots = 9
 
 function App() {
 
@@ -20,8 +21,7 @@ function App() {
 	const [seconds, setSeconds] = useState(0)
 	const [step, setStep] = useState(0)
 	const [totalClicks, setTotalClicks] = useState(0)
-	const [victory, setVictory] = useState(false)
-	// const timerToClearSomewhere = useRef(false)
+	const [start, setStart] = useState(false)
 
 	const showCards = () => {
 		cards.forEach(card => card.classList.add('visible'))
@@ -31,24 +31,31 @@ function App() {
 		cards.forEach(card => card.classList.remove('visible'))
 	}
 
+	const unShuffleCards = () => {
+		for (let i =0; i < cards.length; i++) {
+			cards[i].style.order = i+1;
+		}
+	}
+
 	const shuffleCards = () => {
+		// console.log("Shuffling")
 		for (let i =0; i < cards.length; i++) {
 			cards[i].style.order = i+1;
 		}
 		for(let i = cards.length-1; i > 0; i--) {
-				let randIndex = Math.floor(Math.random() * (i+1));
-				let temp = cards[randIndex].style.order
-				cards[randIndex].style.order = cards[i].style.order;
-				cards[i].style.order = temp;
+			let randIndex = Math.floor(Math.random() * (i+1));
+			let temp = cards[randIndex].style.order
+			cards[randIndex].style.order = cards[i].style.order;
+			cards[i].style.order = temp;
 		}
 	}
 
-	const win = () => {
+	const victory = () => {
 		setStep(0)
-		setTimeout(() => setVictory(true), 2000)
-		// clearInterval(timerToClearSomewhere.current)
-		// console.log(seconds)
-		// console.log(totalClicks)
+		const overlayVictory = document.querySelector('.overlay.victory')
+		overlayVictory.classList.add('visible')
+		matchedCards = []
+		setStart(false)
 	}
 
 	const cardMatch = (card1, card2) => {
@@ -58,9 +65,8 @@ function App() {
 		// card1.classList.add('matched');
 		// card2.classList.add('matched');
 		// this.audioController.match();
-		if (matchedCards.length === 2) {
-			console.log("Victory")
-			win(); 
+		if (matchedCards.length === numRobots*2) {
+			victory(); 
 		}
 	}
 	const cardMisMatch = (card1, card2) => {
@@ -77,10 +83,10 @@ function App() {
 	}
 
 	const flipCard = (card) => {
-		if(step === 0) {
-			setStep(1)
-		}
 		if(canFlipCard(card)) {
+			if(step === 0) {
+				setStep(1)
+			}
 			// this.audioController.flip();
 			setTotalClicks((totalClicks) => totalClicks + 1)
 			card.classList.add('visible');
@@ -109,50 +115,82 @@ function App() {
 	}
 
 	const startGame = () => {
+		setSeconds(0)
+		setTotalClicks(0)
+		unShuffleCards()
 		showCards()
+		console.log(robots)
+		if (true) {
+			console.log("inside startGame")
+		}
 		busy = true;
 		setTimeout(() => {
 			// this.audioController.startMusic();
 			shuffleCards();
+
 			busy = false;
-		}, 2200);
+		}, 2500);
 		setTimeout(() => hideCards(), 2000);
+		const cardValues = document.querySelectorAll('.card-back')
+		setTimeout(() => {
+			for (let card of cardValues) {
+				card.classList.add('hidden')
+			}
+		},2000)
+		setTimeout(() => {
+			for (let card of cardValues) {
+				card.classList.remove('hidden')
+			}
+		},3000)
 	}
 
 	useEffect(() => {
-		
 		fetch('https://jsonplaceholder.typicode.com/users')
 			.then(response => response.json())
-			.then(robots => robots.slice(0,numRobots).map(robot => [robot,{...robot,id: Number(robot.id)+numRobots}]))
+			.then(robots => robots.slice(0,numRobots).map(robot => {
+				let pidnr = robot.id*10 + Math.ceil(Math.random()*10)
+				return [ {...robot, pid: String(pidnr) },{...robot,id: Number(robot.id)+numRobots, pid: String(pidnr) } ]
+			}))
 			.then(totRob => setRobots(totRob.flat(1)))
 	}, [])
 
 	useEffect(() => {
-		const cardsArray = Array.from(document.querySelectorAll('.card'))
-		
 		if (robots.length) {
-			for (const card of cardsArray) {
-				card.addEventListener('click', () => {
-					flipCard(card)
-				})
+			const cardsArray = Array.from(document.querySelectorAll('.card'))
+			const overlays = Array.from(document.querySelectorAll('.overlay'))
+			
+			if (overlays.length) {
+				console.log('overlays')
+				for (const overlay of overlays) {
+					overlay.addEventListener('click', () => {
+						overlay.classList.remove('visible')
+						setStart(true)
+					})
+				}
 			}
-			setCards(cardsArray)
+
+			if (cardsArray.length) {
+				for (const card of cardsArray) {
+					card.addEventListener('click', () => {
+						flipCard(card)
+					})
+				}
+				setCards(cardsArray)
+			}
 		}
 	}, [robots]);
 
 	useEffect(() => {
-		startGame()
-	}, [cards])
+		if(start) 
+			startGame()
+	}, [start])
 
   useEffect(() => {
-		// setSeconds(0)
-		
 		const timer = setInterval(() => {
 			setSeconds(seconds => seconds + step);
 		}, 1000);
 		// componentWillUnmount
 		return () => clearInterval(timer)
-
   }, [step]);
 
 	return (!robots.length ? 
@@ -160,12 +198,13 @@ function App() {
 		(
 			<div>
 				<Header seconds={seconds} totalClicks={totalClicks} />
+				<StartPage />
 				<Scroll >
 					<ErrorBoundary>
 						<CardList robots={robots} />
 					</ErrorBoundary>
 				</Scroll>
-				<Victory seconds={seconds} totalClicks={totalClicks} victory={victory}/>
+				<Victory seconds={seconds} totalClicks={totalClicks}/>
 			</div>
 		)
 	)
