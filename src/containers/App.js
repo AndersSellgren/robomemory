@@ -147,7 +147,7 @@ function App() {
 	useEffect(() => {
 		fetch('https://jsonplaceholder.typicode.com/users')
 			.then(response => response.json())
-			.then(robots => robots.slice(0,numRobots).map(robot => {
+			.then(data => data.slice(0,numRobots).map(robot => {
 				let pidnr = robot.id*10 + Math.ceil(Math.random()*10)
 				return [ {...robot, pid: String(pidnr) },{...robot,id: Number(robot.id)+numRobots, pid: String(pidnr) } ]
 			}))

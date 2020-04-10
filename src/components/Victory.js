@@ -8,7 +8,7 @@ function Victory({totalClicks, seconds}) {
           <h1> Well done </h1>
           <h2> Total Score: {1000 - totalClicks - seconds} </h2>
           <br></br>
-          <h3> (Click to play again!) </h3>
+          <h3> (Click here to play again!) </h3>
         </div>
     </div> 
   )
