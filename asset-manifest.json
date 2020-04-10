@@ -1,25 +1,27 @@
 {
   "files": {
-    "main.css": "/robomemory/static/css/main.d7544699.chunk.css",
-    "main.js": "/robomemory/static/js/main.fd9aad32.chunk.js",
-    "main.js.map": "/robomemory/static/js/main.fd9aad32.chunk.js.map",
+    "main.css": "/robomemory/static/css/main.5d308017.chunk.css",
+    "main.js": "/robomemory/static/js/main.8bf008a7.chunk.js",
+    "main.js.map": "/robomemory/static/js/main.8bf008a7.chunk.js.map",
     "runtime-main.js": "/robomemory/static/js/runtime-main.4059e67f.js",
     "runtime-main.js.map": "/robomemory/static/js/runtime-main.4059e67f.js.map",
     "static/css/2.3b6f1bda.chunk.css": "/robomemory/static/css/2.3b6f1bda.chunk.css",
-    "static/js/2.97eeb36e.chunk.js": "/robomemory/static/js/2.97eeb36e.chunk.js",
-    "static/js/2.97eeb36e.chunk.js.map": "/robomemory/static/js/2.97eeb36e.chunk.js.map",
+    "static/js/2.13b23e7f.chunk.js": "/robomemory/static/js/2.13b23e7f.chunk.js",
+    "static/js/2.13b23e7f.chunk.js.map": "/robomemory/static/js/2.13b23e7f.chunk.js.map",
     "index.html": "/robomemory/index.html",
-    "precache-manifest.a30317fa74d527bca253eba18360f214.js": "/robomemory/precache-manifest.a30317fa74d527bca253eba18360f214.js",
+    "precache-manifest.4e3b84633ba30d703ea53a2ad5e8964b.js": "/robomemory/precache-manifest.4e3b84633ba30d703ea53a2ad5e8964b.js",
     "service-worker.js": "/robomemory/service-worker.js",
     "static/css/2.3b6f1bda.chunk.css.map": "/robomemory/static/css/2.3b6f1bda.chunk.css.map",
-    "static/css/main.d7544699.chunk.css.map": "/robomemory/static/css/main.d7544699.chunk.css.map",
-    "static/js/2.97eeb36e.chunk.js.LICENSE.txt": "/robomemory/static/js/2.97eeb36e.chunk.js.LICENSE.txt"
+    "static/css/main.5d308017.chunk.css.map": "/robomemory/static/css/main.5d308017.chunk.css.map",
+    "static/js/2.13b23e7f.chunk.js.LICENSE.txt": "/robomemory/static/js/2.13b23e7f.chunk.js.LICENSE.txt",
+    "static/media/default.png": "/robomemory/static/media/default.b9dc8cd5.png",
+    "static/media/lightningTiny.png": "/robomemory/static/media/lightningTiny.fd831b85.png"
   },
   "entrypoints": [
     "static/js/runtime-main.4059e67f.js",
     "static/css/2.3b6f1bda.chunk.css",
-    "static/js/2.97eeb36e.chunk.js",
-    "static/css/main.d7544699.chunk.css",
-    "static/js/main.fd9aad32.chunk.js"
+    "static/js/2.13b23e7f.chunk.js",
+    "static/css/main.5d308017.chunk.css",
+    "static/js/main.8bf008a7.chunk.js"
   ]
 }
