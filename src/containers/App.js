@@ -2,22 +2,26 @@
 import React, {useState, useEffect} from 'react';
 import CardList from '../components/CardList';
 // import { robots } from '../robots';
+import Victory from './Victory';
 import Scroll from '../components/Scroll';
 import './App.css'
 import ErrorBoundary from './ErrorBoundary'
 import Header from './Header'
 
-
 let cardToCheck = null;
 let busy = true
+let matchedCards = []
+const numRobots = 1
 
 function App() {
 
 	const [robots, setRobots] = useState([]);
 	const [cards, setCards] = useState([])
-	const [matchedCards, setMatchedCards] = useState([])
 	const [seconds, setSeconds] = useState(0)
-	const [gameStarted, setGameStarted] = useState(false)
+	const [step, setStep] = useState(0)
+	const [totalClicks, setTotalClicks] = useState(0)
+	const [victory, setVictory] = useState(false)
+	// const timerToClearSomewhere = useRef(false)
 
 	const showCards = () => {
 		cards.forEach(card => card.classList.add('visible'))
@@ -37,20 +41,27 @@ function App() {
 				cards[randIndex].style.order = cards[i].style.order;
 				cards[i].style.order = temp;
 		}
-		// for(let i = 0; i < cards.length; i++) {
-		//     console.log(cards[i].style.order)
-		// }
-		// setCards([...cards])
-		// return cards
+	}
+
+	const win = () => {
+		setStep(0)
+		setTimeout(() => setVictory(true), 2000)
+		// clearInterval(timerToClearSomewhere.current)
+		// console.log(seconds)
+		// console.log(totalClicks)
 	}
 
 	const cardMatch = (card1, card2) => {
-		setMatchedCards([...matchedCards,card1,card2]);
+		matchedCards = [...matchedCards,card1,card2];
+		console.log(matchedCards)
+		console.log(card1)
 		// card1.classList.add('matched');
 		// card2.classList.add('matched');
 		// this.audioController.match();
-		// if(this.matchedCards.length === this.cardsArray.length)
-				// this.victory(); 
+		if (matchedCards.length === 2) {
+			console.log("Victory")
+			win(); 
+		}
 	}
 	const cardMisMatch = (card1, card2) => {
 			busy = true
@@ -62,36 +73,29 @@ function App() {
 	}
 
 	const canFlipCard = (card) => {
-		// console.log(busy)
 		return !busy && !matchedCards.includes(card) && card !== cardToCheck;
 	}
 
 	const flipCard = (card) => {
-		if(!gameStarted) {
-			setGameStarted(true)
+		if(step === 0) {
+			setStep(1)
 		}
 		if(canFlipCard(card)) {
-			console.log(card)
 			// this.audioController.flip();
-			// this.totalClicks++;
-			// this.ticker.innerText = this.totalClicks;
+			setTotalClicks((totalClicks) => totalClicks + 1)
 			card.classList.add('visible');
 
 			if(cardToCheck) {
 				console.log("Inside cardToCheck")
 				checkForCardMatch(card);
 			} else {
-				// setCardToCheck(card);
 				cardToCheck = card;
 				console.log("Outside cardToCheck")
-				// console.log(card)
-				// console.log(cardToCheck)
 			}
 		}
 	}
 
 	const getCardType = (card) => {
-		console.log(card.getElementsByClassName('card-value')[0].src)
 		return card.getElementsByClassName('card-value')[0].src;
 	}
 
@@ -106,25 +110,20 @@ function App() {
 
 	const startGame = () => {
 		showCards()
-		// setCardToCheck(null);
-		// this.totalClicks = 0;
-		// matchedCards = [];
 		busy = true;
 		setTimeout(() => {
 			// this.audioController.startMusic();
 			shuffleCards();
-			// this.countDown = this.startCountDown();
 			busy = false;
 		}, 2200);
 		setTimeout(() => hideCards(), 2000);
-		// this.timer.innerText = this.timeRemaining;
-		// this.ticker.innerText = this.totalClicks;
 	}
 
 	useEffect(() => {
+		
 		fetch('https://jsonplaceholder.typicode.com/users')
 			.then(response => response.json())
-			.then(robots => robots.slice(0,9).map(robot => [robot,{...robot,id: Number(robot.id)*10}]))
+			.then(robots => robots.slice(0,numRobots).map(robot => [robot,{...robot,id: Number(robot.id)+numRobots}]))
 			.then(totRob => setRobots(totRob.flat(1)))
 	}, [])
 
@@ -146,26 +145,27 @@ function App() {
 	}, [cards])
 
   useEffect(() => {
-		setSeconds(0)
-		if(gameStarted){
-			const interval = setInterval(() => {
-				setSeconds(seconds => seconds + 1);
-			}, 1000);
-			// componentWillUnmount
-			return () => clearInterval(interval);
-		}
-  }, [gameStarted]);
+		// setSeconds(0)
+		
+		const timer = setInterval(() => {
+			setSeconds(seconds => seconds + step);
+		}, 1000);
+		// componentWillUnmount
+		return () => clearInterval(timer)
+
+  }, [step]);
 
 	return (!robots.length ? 
 		<h1> Loading </h1> :
 		(
 			<div>
-				<Header seconds={seconds} />
+				<Header seconds={seconds} totalClicks={totalClicks} />
 				<Scroll >
 					<ErrorBoundary>
 						<CardList robots={robots} />
 					</ErrorBoundary>
 				</Scroll>
+				<Victory seconds={seconds} totalClicks={totalClicks} victory={victory}/>
 			</div>
 		)
 	)

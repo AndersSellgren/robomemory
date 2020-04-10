@@ -58,5 +58,5 @@ p {
   transform: rotateY(180deg);
 }
 
-.grows { transition: all 200ms linear; }
+.grows { transition: all 100ms linear; }
 .grows:active { transform: scale(1.1); }
