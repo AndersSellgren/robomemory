@@ -11,12 +11,8 @@
 }
 .overlay.visible {
   display: flex;
-  z-index: 111;
+  z-index: 100;
   animation: overlay-grow 500ms forwards;
-}
-
-.hidden {
-  animation: overlay-grow-shrink 1000ms forwards;
 }
 
 @keyframes overlay-grow {
@@ -28,6 +24,10 @@
     background-color: rgba(0, 0, 0, .8);
     font-size: 2em;
   }
+}
+
+.hideCards {
+  animation: overlay-grow-shrink 1000ms forwards;
 }
 
 @keyframes overlay-grow-shrink {
@@ -56,6 +56,6 @@
   margin: 30px;
   margin-bottom: 20vh;
   z-index: 100;
-  padding: 2em;
+  padding: 1.5em;
   border-radius: 2em; 
 }

@@ -1,4 +1,4 @@
-export const robots = [
+export const robotNames = [
   {
     id: 1,
     name: '',
@@ -32,7 +32,7 @@ export const robots = [
   {
     id: 6,
     name: '',
-    username: 'Majken',
+    username: 'Simon',
     email: ''
   },
   {
@@ -50,7 +50,7 @@ export const robots = [
   {
     id: 9,
     name: '',
-    username: 'Test',
+    username: 'Marie',
     email: ''
   },
   {

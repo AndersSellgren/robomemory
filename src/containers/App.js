@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect} from 'react';
 import CardList from '../components/CardList';
-// import { robots } from '../robots';
+import { robotNames } from './robots';
 import Victory from '../components/Victory';
-import StartPage from '../components/StartPage';
+import Welcome from '../components/Welcome';
 import Scroll from '../components/Scroll';
-import './App.css'
 import ErrorBoundary from './ErrorBoundary'
 import Header from '../components/Header'
+import './App.css'
 
 let cardToCheck = null;
 let busy = true
@@ -38,7 +38,6 @@ function App() {
 	}
 
 	const shuffleCards = () => {
-		// console.log("Shuffling")
 		for (let i =0; i < cards.length; i++) {
 			cards[i].style.order = i+1;
 		}
@@ -48,6 +47,16 @@ function App() {
 			cards[randIndex].style.order = cards[i].style.order;
 			cards[i].style.order = temp;
 		}
+	}
+
+	const animationCards = () => {
+		const cardValues = document.querySelectorAll('.card-back')
+		setTimeout(() => {
+			[...cardValues].map(card => card.classList.add('hideCards'))
+		},2000)
+		setTimeout(() => {
+			[...cardValues].map(card => card.classList.remove('hideCards'))
+		},3000)
 	}
 
 	const victory = () => {
@@ -60,8 +69,6 @@ function App() {
 
 	const cardMatch = (card1, card2) => {
 		matchedCards = [...matchedCards,card1,card2];
-		console.log(matchedCards)
-		console.log(card1)
 		// card1.classList.add('matched');
 		// card2.classList.add('matched');
 		// this.audioController.match();
@@ -70,12 +77,24 @@ function App() {
 		}
 	}
 	const cardMisMatch = (card1, card2) => {
-			busy = true
-			setTimeout(() => {
-					card1.classList.remove('visible');
-					card2.classList.remove('visible');
-					busy = false
-			}, 1000);
+		busy = true
+		setTimeout(() => {
+				card1.classList.remove('visible');
+				card2.classList.remove('visible');
+				busy = false
+		}, 750);
+	}
+
+	const getCardType = (card) => {
+		return card.getElementsByClassName('card-value')[0].src;
+	}
+
+	const checkForCardMatch = (card) => {
+		if(getCardType(card) === getCardType(cardToCheck))
+			cardMatch(card, cardToCheck);
+		else 
+			cardMisMatch(card, cardToCheck);
+		cardToCheck = null;
 	}
 
 	const canFlipCard = (card) => {
@@ -92,66 +111,39 @@ function App() {
 			card.classList.add('visible');
 
 			if(cardToCheck) {
-				console.log("Inside cardToCheck")
 				checkForCardMatch(card);
 			} else {
 				cardToCheck = card;
-				console.log("Outside cardToCheck")
 			}
 		}
-	}
-
-	const getCardType = (card) => {
-		return card.getElementsByClassName('card-value')[0].src;
-	}
-
-	const checkForCardMatch = (card) => {
-		if(getCardType(card) === getCardType(cardToCheck))
-				cardMatch(card, cardToCheck);
-		else 
-				cardMisMatch(card, cardToCheck);
-
-		cardToCheck = null;
 	}
 
 	const startGame = () => {
 		setSeconds(0)
 		setTotalClicks(0)
-		unShuffleCards()
 		showCards()
-		console.log(robots)
-		if (true) {
-			console.log("inside startGame")
-		}
+		unShuffleCards()
 		busy = true;
 		setTimeout(() => {
 			// this.audioController.startMusic();
 			shuffleCards();
-
 			busy = false;
 		}, 2500);
 		setTimeout(() => hideCards(), 2000);
-		const cardValues = document.querySelectorAll('.card-back')
-		setTimeout(() => {
-			for (let card of cardValues) {
-				card.classList.add('hidden')
-			}
-		},2000)
-		setTimeout(() => {
-			for (let card of cardValues) {
-				card.classList.remove('hidden')
-			}
-		},3000)
+		animationCards()
 	}
+	// async function fetchData() {
+	// 	const response = await fetch('https://jsonplaceholder.typicode.com/users')
+	// 	const data =  await response.json()
+	// 	return data.slice(0,numRobots)
+	// }
 
 	useEffect(() => {
-		fetch('https://jsonplaceholder.typicode.com/users')
-			.then(response => response.json())
-			.then(data => data.slice(0,numRobots).map(robot => {
-				let pidnr = robot.id*10 + Math.ceil(Math.random()*10)
-				return [ {...robot, pid: String(pidnr) },{...robot,id: Number(robot.id)+numRobots, pid: String(pidnr) } ]
-			}))
-			.then(totRob => setRobots(totRob.flat(1)))
+		const totRobots = robotNames.slice(0,numRobots).map(robot => {
+			let pidnr = (robot.id-1)*10 + Math.ceil(Math.random()*10);
+			return [ {...robot, pid: String(pidnr) },{...robot,id: Number(robot.id)+numRobots, pid: String(pidnr) } ]
+		})
+		setRobots(totRobots.flat(1))
 	}, [])
 
 	useEffect(() => {
@@ -160,7 +152,6 @@ function App() {
 			const overlays = Array.from(document.querySelectorAll('.overlay'))
 			
 			if (overlays.length) {
-				console.log('overlays')
 				for (const overlay of overlays) {
 					overlay.addEventListener('click', () => {
 						overlay.classList.remove('visible')
@@ -198,7 +189,7 @@ function App() {
 		(
 			<div>
 				<Header seconds={seconds} totalClicks={totalClicks} />
-				<StartPage />
+				<Welcome />
 				<Scroll >
 					<ErrorBoundary>
 						<CardList robots={robots} />

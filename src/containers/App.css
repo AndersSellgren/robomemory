@@ -1,12 +1,12 @@
 @font-face {
-    font-family: 'SEGA LOGO FONT';
+    font-family: 'NiseSega';
     font-style: normal;
     font-weight: bold;
-    src: local('SEGA');
+    src: url('NiseSega Cyrillic.ttf');
 }
 
 div h1 {
-    font-family: "SEGA LOGO FONT";
+    font-family: "NiseSega";
     font-size: 3em;
     margin: 0;
     padding: 0;

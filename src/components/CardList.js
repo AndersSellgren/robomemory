@@ -11,7 +11,7 @@ function CardList({robots}) {
 							key={robot.id} 
 							id={robot.id} 
 							username={robot.username} 
-							email={robot.email}
+							// email={robot.email}
 							pid = {robot.pid}
 							/>
 					)

@@ -1,12 +1,21 @@
 import React from 'react';
 
-const Scroll = (props) => {
+function Scroll(props) {
 	return (
-		<div style={{boxSizing: 'border-box', padding: '10px', overflowY: 'auto', border: '5px solid black', height: '90vh', width: '100wh', zIndex:'1'}}>
+		<div style={divStyle}>
 			{props.children}
 		</div>
 	);
-	// console.log(props);
 };
+
+const divStyle = {
+	boxSizing: 'border-box', 
+	padding: '10px', 
+	overflowY: 'auto', 
+	border: '5px solid black', 
+	height: '90vh', 
+	width: '100wh', 
+	zIndex:'1'
+}
 
 export default Scroll;

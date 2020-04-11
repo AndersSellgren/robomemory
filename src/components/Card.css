@@ -1,12 +1,14 @@
-/* body {
-	box-sizing: 'border-box',
-} */
+h2 {
+  font-weight:700;
+  font-family: 'NiseSega', 'Roboto', sans-serif;
+}
 
-h2, h3 {
+h3 {
   color: #111;
-	padding: 0;
-	margin: 0.5rem;
-	padding: 5px;
+	margin: 0rem;
+  padding: 10px;
+  font-family: "NiseSega",'Roboto', sans-serif;
+  font-size: 1.2em;
 }
 
 p {
@@ -58,5 +60,5 @@ p {
   transform: rotateY(180deg);
 }
 
-.grows { transition: all 100ms linear; }
-.grows:active { transform: scale(1.1); }
+.grows { transition: all 75ms linear; }
+.grows:active { transform: scale(1.08); }
