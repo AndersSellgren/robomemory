@@ -1,29 +1,35 @@
 {
   "files": {
     "main.css": "/robomemory/static/css/main.2759a6d9.chunk.css",
-    "main.js": "/robomemory/static/js/main.3c1aee3d.chunk.js",
-    "main.js.map": "/robomemory/static/js/main.3c1aee3d.chunk.js.map",
+    "main.js": "/robomemory/static/js/main.4c6cb5a6.chunk.js",
+    "main.js.map": "/robomemory/static/js/main.4c6cb5a6.chunk.js.map",
     "runtime-main.js": "/robomemory/static/js/runtime-main.4059e67f.js",
     "runtime-main.js.map": "/robomemory/static/js/runtime-main.4059e67f.js.map",
     "static/css/2.3b6f1bda.chunk.css": "/robomemory/static/css/2.3b6f1bda.chunk.css",
-    "static/js/2.640f02fe.chunk.js": "/robomemory/static/js/2.640f02fe.chunk.js",
-    "static/js/2.640f02fe.chunk.js.map": "/robomemory/static/js/2.640f02fe.chunk.js.map",
+    "static/js/2.aa088277.chunk.js": "/robomemory/static/js/2.aa088277.chunk.js",
+    "static/js/2.aa088277.chunk.js.map": "/robomemory/static/js/2.aa088277.chunk.js.map",
     "index.html": "/robomemory/index.html",
-    "precache-manifest.75aab2f35b1e0b412f1000ad6d14f1c8.js": "/robomemory/precache-manifest.75aab2f35b1e0b412f1000ad6d14f1c8.js",
+    "precache-manifest.eeb2df1171c55f6a95588a2a4eb61a11.js": "/robomemory/precache-manifest.eeb2df1171c55f6a95588a2a4eb61a11.js",
     "service-worker.js": "/robomemory/service-worker.js",
     "static/css/2.3b6f1bda.chunk.css.map": "/robomemory/static/css/2.3b6f1bda.chunk.css.map",
     "static/css/main.2759a6d9.chunk.css.map": "/robomemory/static/css/main.2759a6d9.chunk.css.map",
-    "static/js/2.640f02fe.chunk.js.LICENSE.txt": "/robomemory/static/js/2.640f02fe.chunk.js.LICENSE.txt",
+    "static/js/2.aa088277.chunk.js.LICENSE.txt": "/robomemory/static/js/2.aa088277.chunk.js.LICENSE.txt",
     "static/media/App.css": "/robomemory/static/media/NiseSega Cyrillic.f4791adf.ttf",
-    "static/media/default.png": "/robomemory/static/media/default.b9dc8cd5.png",
-    "static/media/default2.png": "/robomemory/static/media/default2.97645085.png",
+    "static/media/default1.png": "/robomemory/static/media/default1.ac6d699b.png",
+    "static/media/default2.png": "/robomemory/static/media/default2.e305add1.png",
+    "static/media/default3.png": "/robomemory/static/media/default3.2a586e79.png",
+    "static/media/default4.png": "/robomemory/static/media/default4.38e843f2.png",
+    "static/media/default5.png": "/robomemory/static/media/default5.3a6527c7.png",
+    "static/media/default7.png": "/robomemory/static/media/default7.1899d56d.png",
+    "static/media/default8.png": "/robomemory/static/media/default8.01165004.png",
+    "static/media/default9.png": "/robomemory/static/media/default9.ded47227.png",
     "static/media/lightning.png": "/robomemory/static/media/lightning.fd831b85.png"
   },
   "entrypoints": [
     "static/js/runtime-main.4059e67f.js",
     "static/css/2.3b6f1bda.chunk.css",
-    "static/js/2.640f02fe.chunk.js",
+    "static/js/2.aa088277.chunk.js",
     "static/css/main.2759a6d9.chunk.css",
-    "static/js/main.3c1aee3d.chunk.js"
+    "static/js/main.4c6cb5a6.chunk.js"
   ]
 }
