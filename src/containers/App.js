@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import CardList from '../components/CardList';
 import { robotNames } from './robots';
 import Victory from '../components/Victory';
@@ -9,13 +9,11 @@ import ErrorBoundary from './ErrorBoundary'
 import Header from '../components/Header'
 import './App.css'
 
-let cardToCheck = null;
-let busy = true
-let matchedCards = []
-const numRobots = 9
-
 function App() {
-
+	const numRobots = 3
+	const cardToCheck = useRef(null);
+	const busy = useRef(true)
+	const matchedCards = useRef([])
 	const [robots, setRobots] = useState([]);
 	const [cards, setCards] = useState([])
 	const [seconds, setSeconds] = useState(0)
@@ -63,25 +61,25 @@ function App() {
 		setStep(0)
 		const overlayVictory = document.querySelector('.overlay.victory')
 		overlayVictory.classList.add('visible')
-		matchedCards = []
+		matchedCards.current = []
 		setStart(false)
 	}
 
 	const cardMatch = (card1, card2) => {
-		matchedCards = [...matchedCards,card1,card2];
+		matchedCards.current = [...matchedCards.current,card1,card2];
 		// card1.classList.add('matched');
 		// card2.classList.add('matched');
 		// this.audioController.match();
-		if (matchedCards.length === numRobots*2) {
+		if (matchedCards.current.length === numRobots*2) {
 			victory(); 
 		}
 	}
 	const cardMisMatch = (card1, card2) => {
-		busy = true
+		busy.current = true
 		setTimeout(() => {
 				card1.classList.remove('visible');
 				card2.classList.remove('visible');
-				busy = false
+				busy.current = false
 		}, 750);
 	}
 
@@ -90,15 +88,15 @@ function App() {
 	}
 
 	const checkForCardMatch = (card) => {
-		if(getCardType(card) === getCardType(cardToCheck))
-			cardMatch(card, cardToCheck);
+		if(getCardType(card) === getCardType(cardToCheck.current))
+			cardMatch(card, cardToCheck.current);
 		else 
-			cardMisMatch(card, cardToCheck);
-		cardToCheck = null;
+			cardMisMatch(card, cardToCheck.current);
+		cardToCheck.current = null;
 	}
 
 	const canFlipCard = (card) => {
-		return !busy && !matchedCards.includes(card) && card !== cardToCheck;
+		return !busy.current && !matchedCards.current.includes(card) && card !== cardToCheck.current;
 	}
 
 	const flipCard = (card) => {
@@ -110,10 +108,10 @@ function App() {
 			setTotalClicks((totalClicks) => totalClicks + 1)
 			card.classList.add('visible');
 
-			if(cardToCheck) {
+			if(cardToCheck.current) {
 				checkForCardMatch(card);
 			} else {
-				cardToCheck = card;
+				cardToCheck.current = card;
 			}
 		}
 	}
@@ -123,11 +121,11 @@ function App() {
 		setTotalClicks(0)
 		showCards()
 		unShuffleCards()
-		busy = true;
+		busy.current = true;
 		setTimeout(() => {
 			// this.audioController.startMusic();
 			shuffleCards();
-			busy = false;
+			busy.current = false;
 		}, 2500);
 		setTimeout(() => hideCards(), 2000);
 		animationCards()
@@ -139,11 +137,11 @@ function App() {
 	// }
 
 	useEffect(() => {
-		const totRobots = robotNames.slice(0,numRobots).map(robot => {
+		const totRobots = robotNames.slice(0,numRobots).flatMap(robot => {
 			let pidnr = (robot.id-1)*10 + Math.ceil(Math.random()*10);
-			return [ {...robot, pid: String(pidnr) },{...robot,id: Number(robot.id)+numRobots, pid: String(pidnr) } ]
+			return [ {...robot, pid: pidnr, id: 2*robot.id-1 },{...robot, pid: pidnr,id: 2*robot.id } ]
 		})
-		setRobots(totRobots.flat(1))
+		setRobots(totRobots)
 	}, [])
 
 	useEffect(() => {
@@ -180,13 +178,11 @@ function App() {
 		const timer = setInterval(() => {
 			setSeconds(seconds => seconds + step);
 		}, 1000);
-		// componentWillUnmount
+		// componentDidUnmount right before the second call
 		return () => clearInterval(timer)
   }, [step]);
 
-	return (!robots.length ? 
-		<h1> Loading </h1> :
-		(
+	return (!robots.length ? <h1> Loading </h1> :
 			<div>
 				<Header seconds={seconds} totalClicks={totalClicks} />
 				<Welcome />
@@ -197,7 +193,6 @@ function App() {
 				</Scroll>
 				<Victory seconds={seconds} totalClicks={totalClicks}/>
 			</div>
-		)
 	)
 };
 
