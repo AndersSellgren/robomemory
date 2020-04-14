@@ -1,18 +1,19 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Card from './Card';
 
 function CardList({robots}) {
-	const counter = useRef(0)
+	// const counter = useRef(0)
 
 	return (
 		<div style={divStyle}>
 			{
 				robots.map((robot) => {
 					return (<Card
-							key = {robot.id}
+							key = {robot.key}
+							id = {robot.id}
 							username={robot.username} 
 							pid = {robot.pid}
-							counter = {counter}
+							// counter = {counter}
 							/>
 					)
 				})

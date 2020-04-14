@@ -10,16 +10,23 @@ import Header from '../components/Header'
 import './App.css'
 
 function App() {
-	const numRobots = 3
+	// constant
+	const numRobots = 9
+	// variables that requires synchronized updates and 
+	// should not cause a rendering
 	const cardToCheck = useRef(null);
 	const busy = useRef(true)
 	const matchedCards = useRef([])
-	const [robots, setRobots] = useState([]);
+	// These states should result in rendering
 	const [cards, setCards] = useState([])
-	const [seconds, setSeconds] = useState(0)
 	const [step, setStep] = useState(0)
-	const [totalClicks, setTotalClicks] = useState(0)
 	const [start, setStart] = useState(false)
+	// These states are used in rendering => changes of 
+	// these should result in rendering
+	const [robots, setRobots] = useState([]);
+	const [seconds, setSeconds] = useState(0)
+	const [totalClicks, setTotalClicks] = useState(0)
+	
 
 	const showCards = () => {
 		cards.forEach(card => card.classList.add('visible'))
@@ -139,7 +146,7 @@ function App() {
 	useEffect(() => {
 		const totRobots = robotNames.slice(0,numRobots).flatMap(robot => {
 			let pidnr = (robot.id-1)*10 + Math.ceil(Math.random()*10);
-			return [ {...robot, pid: pidnr, id: 2*robot.id-1 },{...robot, pid: pidnr,id: 2*robot.id } ]
+			return [ {...robot, pid: pidnr, key: 2*robot.id-1 },{...robot, pid: pidnr,key: 2*robot.id } ]
 		})
 		setRobots(totRobots)
 	}, [])
