@@ -21,6 +21,7 @@ function App() {
 	const [cards, setCards] = useState([])
 	const [step, setStep] = useState(0)
 	const [start, setStart] = useState(false)
+	const [newRobots, setNewRobots] = useState(true)
 	// These states are used in rendering => changes of 
 	// these should result in rendering
 	const [robots, setRobots] = useState([]);
@@ -70,6 +71,7 @@ function App() {
 		overlayVictory.classList.add('visible')
 		matchedCards.current = []
 		setStart(false)
+		setNewRobots(true)
 	}
 
 	const cardMatch = (card1, card2) => {
@@ -128,6 +130,7 @@ function App() {
 		setTotalClicks(0)
 		showCards()
 		unShuffleCards()
+		setNewRobots(false)
 		busy.current = true;
 		setTimeout(() => {
 			// this.audioController.startMusic();
@@ -144,12 +147,14 @@ function App() {
 	// }
 
 	useEffect(() => {
-		const totRobots = robotNames.slice(0,numRobots).flatMap(robot => {
-			let pidnr = (robot.id-1)*10 + Math.ceil(Math.random()*10);
-			return [ {...robot, pid: pidnr, key: 2*robot.id-1 },{...robot, pid: pidnr,key: 2*robot.id } ]
-		})
-		setRobots(totRobots)
-	}, [])
+		if (newRobots) {
+			const totRobots = robotNames.slice(0,numRobots).flatMap(robot => {
+				let pidnr = (robot.id-1)*10 + Math.ceil(Math.random()*10);
+				return [ {...robot, pid: pidnr, key: 2*robot.id-1 },{...robot, pid: pidnr,key: 2*robot.id } ]
+			})
+			setRobots(totRobots)
+		}
+	}, [newRobots])
 
 	useEffect(() => {
 		if (robots.length) {

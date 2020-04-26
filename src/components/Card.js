@@ -1,5 +1,5 @@
 import React from 'react';
-import lightning from "./images/tinified/lightning.png";
+import lightning from "./images/tinified/lightning2.png";
 import defaultImages from "./defaultImages";
 import './Card.css'
 import './Overlay.css'
@@ -9,7 +9,6 @@ function Card({ username, pid, id }) {
 	let srcImg = `https://robohash.org/set_set1/${pid}?size=150x150`	
 
 	const getDefaultImg = (event) => {
-		console.log('getDefaultImg')
 		event.target.setAttribute("src", defaultImages[id])
 	}
 
