@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f6fdc36fd33fed2281073eb83285218c",
+    "revision": "d826ec3fe7067de464f472ccd7ed1562",
     "url": "/robomemory/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/robomemory/static/css/2.3b6f1bda.chunk.css"
   },
   {
-    "revision": "c35673d8a73346341ded",
+    "revision": "0cea01a50078c288843d",
     "url": "/robomemory/static/css/main.2759a6d9.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/robomemory/static/js/2.b49d4900.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c35673d8a73346341ded",
-    "url": "/robomemory/static/js/main.513acca6.chunk.js"
+    "revision": "0cea01a50078c288843d",
+    "url": "/robomemory/static/js/main.9227f53f.chunk.js"
   },
   {
     "revision": "c5d653f1a909981691d6",
@@ -64,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/robomemory/static/media/default9.ded47227.png"
   },
   {
-    "revision": "fd831b8565e035f952afc192adfaf9c1",
-    "url": "/robomemory/static/media/lightning.fd831b85.png"
+    "revision": "3743c2738a16a64dfb3ee0b9aa61e570",
+    "url": "/robomemory/static/media/lightning2.3743c273.png"
   }
 ]);
