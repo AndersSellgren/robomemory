@@ -148,11 +148,11 @@ function App() {
 
 	useEffect(() => {
 		if (newRobots) {
-			const totRobots = robotNames.slice(0,numRobots).flatMap(robot => {
+			const robotToLoad = robotNames.slice(0,numRobots).flatMap(robot => {
 				let pidnr = (robot.id-1)*10 + Math.ceil(Math.random()*10);
 				return [ {...robot, pid: pidnr, key: 2*robot.id-1 },{...robot, pid: pidnr,key: 2*robot.id } ]
 			})
-			setRobots(totRobots)
+			setRobots(robotToLoad)
 		}
 	}, [newRobots])
 
@@ -178,6 +178,10 @@ function App() {
 				}
 				setCards(cardsArray)
 			}
+			robots.forEach((robot) => {
+				const img = new Image();
+				img.src = `https://robohash.org/set_set1/${robot.pid}?size=150x150`
+			});
 		}
 	}, [robots]);
 
