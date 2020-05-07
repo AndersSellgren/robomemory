@@ -9,6 +9,8 @@ import ErrorBoundary from './ErrorBoundary'
 import Header from '../components/Header'
 import './App.css'
 
+var allImages = [];
+
 function App() {
 	// constant
 	const numRobots = 9
@@ -181,6 +183,7 @@ function App() {
 			robots.forEach((robot) => {
 				const img = new Image();
 				img.src = `https://robohash.org/set_set1/${robot.pid}?size=150x150`
+				allImages.push(img)
 			});
 		}
 	}, [robots]);
