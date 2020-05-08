@@ -19,7 +19,7 @@ function Card({ username, pid, id }) {
 			</div>
 			<div className="card-front card-face">
 				<img className="card-value" onError= { (event) => getDefaultImg(event) } src={ srcImg } alt = { `./images/tinified/default${id}.png` } />
-				<h3>{username.substring(0,8)}</h3>	
+				<h3 className="name"> {username.substring(0,8)} </h3>	
 			</div >
 		</div>
 	);

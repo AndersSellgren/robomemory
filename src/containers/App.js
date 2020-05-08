@@ -29,6 +29,7 @@ function App() {
 	const [robots, setRobots] = useState([]);
 	const [seconds, setSeconds] = useState(0)
 	const [totalClicks, setTotalClicks] = useState(0)
+	const [initOverlay, setInitOverlay] = useState(false)
 	
 
 	const showCards = () => {
@@ -68,12 +69,9 @@ function App() {
 	}
 
 	const victory = () => {
-		setStep(0)
 		const overlayVictory = document.querySelector('.overlay.victory')
 		overlayVictory.classList.add('visible')
-		matchedCards.current = []
-		setStart(false)
-		setNewRobots(true)
+		// setNewRobots(true)
 	}
 
 	const cardMatch = (card1, card2) => {
@@ -81,9 +79,6 @@ function App() {
 		// card1.classList.add('matched');
 		// card2.classList.add('matched');
 		// this.audioController.match();
-		if (matchedCards.current.length === numRobots*2) {
-			victory(); 
-		}
 	}
 	const cardMisMatch = (card1, card2) => {
 		busy.current = true
@@ -95,7 +90,7 @@ function App() {
 	}
 
 	const getCardType = (card) => {
-		return card.getElementsByClassName('card-value')[0].src;
+		return card.getElementsByClassName('name')[0].innerHTML;
 	}
 
 	const checkForCardMatch = (card) => {
@@ -103,7 +98,15 @@ function App() {
 			cardMatch(card, cardToCheck.current);
 		else 
 			cardMisMatch(card, cardToCheck.current);
+		
 		cardToCheck.current = null;
+		
+		if (matchedCards.current.length === numRobots*2) {
+			matchedCards.current = []
+			setStart(false)
+			setStep(0)
+			victory(); 
+		}
 	}
 
 	const canFlipCard = (card) => {
@@ -142,11 +145,7 @@ function App() {
 		setTimeout(() => hideCards(), 2000);
 		animationCards()
 	}
-	// async function fetchData() {
-	// 	const response = await fetch('https://jsonplaceholder.typicode.com/users')
-	// 	const data =  await response.json()
-	// 	return data.slice(0,numRobots)
-	// }
+
 
 	useEffect(() => {
 		if (newRobots) {
@@ -158,19 +157,10 @@ function App() {
 		}
 	}, [newRobots])
 
+
 	useEffect(() => {
 		if (robots.length) {
 			const cardsArray = Array.from(document.querySelectorAll('.card'))
-			const overlays = Array.from(document.querySelectorAll('.overlay'))
-			
-			if (overlays.length) {
-				for (const overlay of overlays) {
-					overlay.addEventListener('click', () => {
-						overlay.classList.remove('visible')
-						setStart(true)
-					})
-				}
-			}
 
 			if (cardsArray.length) {
 				for (const card of cardsArray) {
@@ -185,8 +175,24 @@ function App() {
 				img.src = `https://robohash.org/set_set1/${robot.pid}?size=150x150`
 				allImages.push(img)
 			});
+
+			setInitOverlay(true)
 		}
 	}, [robots]);
+
+	useEffect(() => {
+		if(initOverlay) {
+			const overlays = Array.from(document.querySelectorAll('.overlay'))
+			if (overlays.length) {
+				for (const overlay of overlays) {
+					overlay.addEventListener('click', () => {
+						overlay.classList.remove('visible')
+						setStart(true)
+					})
+				}
+			}
+		}
+	}, [initOverlay]);
 
 	useEffect(() => {
 		if(start) 
