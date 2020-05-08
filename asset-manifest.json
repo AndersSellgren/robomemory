@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/robomemory/static/css/main.2759a6d9.chunk.css",
-    "main.js": "/robomemory/static/js/main.2b57f985.chunk.js",
-    "main.js.map": "/robomemory/static/js/main.2b57f985.chunk.js.map",
+    "main.js": "/robomemory/static/js/main.3666ff1e.chunk.js",
+    "main.js.map": "/robomemory/static/js/main.3666ff1e.chunk.js.map",
     "runtime-main.js": "/robomemory/static/js/runtime-main.4059e67f.js",
     "runtime-main.js.map": "/robomemory/static/js/runtime-main.4059e67f.js.map",
     "static/css/2.3b6f1bda.chunk.css": "/robomemory/static/css/2.3b6f1bda.chunk.css",
     "static/js/2.b49d4900.chunk.js": "/robomemory/static/js/2.b49d4900.chunk.js",
     "static/js/2.b49d4900.chunk.js.map": "/robomemory/static/js/2.b49d4900.chunk.js.map",
     "index.html": "/robomemory/index.html",
-    "precache-manifest.8b37758b94bb5230e42c25b1e6c290b9.js": "/robomemory/precache-manifest.8b37758b94bb5230e42c25b1e6c290b9.js",
+    "precache-manifest.be3eff6b41f73ea9377d77448d2c1a80.js": "/robomemory/precache-manifest.be3eff6b41f73ea9377d77448d2c1a80.js",
     "service-worker.js": "/robomemory/service-worker.js",
     "static/css/2.3b6f1bda.chunk.css.map": "/robomemory/static/css/2.3b6f1bda.chunk.css.map",
     "static/css/main.2759a6d9.chunk.css.map": "/robomemory/static/css/main.2759a6d9.chunk.css.map",
@@ -30,6 +30,6 @@
     "static/css/2.3b6f1bda.chunk.css",
     "static/js/2.b49d4900.chunk.js",
     "static/css/main.2759a6d9.chunk.css",
-    "static/js/main.2b57f985.chunk.js"
+    "static/js/main.3666ff1e.chunk.js"
   ]
 }
