@@ -9,7 +9,7 @@ import ErrorBoundary from './ErrorBoundary'
 import Header from '../components/Header'
 import './App.css'
 
-var allImages = [];
+export var allImages = [];
 
 function App() {
 	// constant
@@ -151,12 +151,21 @@ function App() {
 		if (newRobots) {
 			const robotToLoad = robotNames.slice(0,numRobots).flatMap(robot => {
 				let pidnr = (robot.id-1)*10 + Math.ceil(Math.random()*10);
-				return [ {...robot, pid: pidnr, key: 2*robot.id-1 },{...robot, pid: pidnr,key: 2*robot.id } ]
+				return [ {...robot, pid: pidnr, key: 2*robot.id-1 },{...robot, pid: pidnr, key: 2*robot.id } ]
 			})
 			setRobots(robotToLoad)
 		}
 	}, [newRobots])
 
+
+	function loadImage(src) {
+		return new Promise((resolve, reject) => {
+			const img = new Image();
+			img.addEventListener("load", () => resolve(img));
+			img.addEventListener("error", reject);
+			img.src = src;
+		});
+	};
 
 	useEffect(() => {
 		if (robots.length) {
@@ -170,12 +179,13 @@ function App() {
 				}
 				setCards(cardsArray)
 			}
-			robots.forEach((robot) => {
-				const img = new Image();
-				img.src = `https://robohash.org/set_set1/${robot.pid}?size=150x150`
-				allImages.push(img)
-			});
-
+			robots.forEach(async (robot) => {
+				await loadImage(`https://robohash.org/set_set1/${robot.pid}?size=150x150`) 
+				.then(img => allImages.push(img))
+				.catch(_ => loadImage(`../components/images/tinified/default${robot.id}.png`)
+				.then(img => allImages.push(img))
+				.catch(_ => allImages.push("ERROR"))	
+			)});
 			setInitOverlay(true)
 		}
 	}, [robots]);
@@ -186,8 +196,10 @@ function App() {
 			if (overlays.length) {
 				for (const overlay of overlays) {
 					overlay.addEventListener('click', () => {
-						overlay.classList.remove('visible')
-						setStart(true)
+						if (allImages.length === 18) {
+							overlay.classList.remove('visible')
+							setStart(true)
+						}
 					})
 				}
 			}

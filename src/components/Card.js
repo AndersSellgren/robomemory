@@ -9,7 +9,7 @@ function Card({ username, pid, id }) {
 	let srcImg = `https://robohash.org/set_set1/${pid}?size=150x150`	
 
 	const getDefaultImg = (event) => {
-		event.target.setAttribute("src", defaultImages[id])
+		event.target.setAttribute("src", defaultImages[id-1])
 	}
 
 	return(
