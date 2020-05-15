@@ -162,7 +162,7 @@ function App() {
 		return new Promise((resolve, reject) => {
 			const img = new Image();
 			img.addEventListener("load", () => resolve(img));
-			img.addEventListener("error", reject);
+			img.addEventListener("error", (err) => reject(err));
 			img.src = src;
 		});
 	};
@@ -182,10 +182,8 @@ function App() {
 			robots.forEach((robot) => {
 				loadImage(`https://robohash.org/set_set1/${robot.pid}?size=150x150`) 
 				.then(img => allImages.push(img))
-				.catch(_ => loadImage(`../components/images/tinified/default${robot.id}.png`)
-				.then(img => allImages.push(img))
-				.catch(_ => allImages.push("ERROR"))	
-			)});
+				.catch(err => allImages.push(err))	
+			});
 			setInitOverlay(true)
 		}
 	}, [robots]);
