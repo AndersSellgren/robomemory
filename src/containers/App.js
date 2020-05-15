@@ -30,6 +30,7 @@ function App() {
 	const [seconds, setSeconds] = useState(0)
 	const [totalClicks, setTotalClicks] = useState(0)
 	const [initOverlay, setInitOverlay] = useState(false)
+	const [loadingImages, setLoadingImages] = useState(true)
 	
 
 	const showCards = () => {
@@ -182,8 +183,13 @@ function App() {
 			robots.forEach((robot) => {
 				loadImage(`https://robohash.org/set_set1/${robot.pid}?size=150x150`) 
 				.then(img => allImages.push(img))
-				.catch(err => allImages.push(err))	
-			});
+				.catch(err => allImages.push(err))
+				.finally(() => {
+					if(allImages.length === 2*numRobots) {
+						setLoadingImages(false)
+					}
+				})
+			})	
 			setInitOverlay(true)
 		}
 	}, [robots]);
@@ -191,15 +197,13 @@ function App() {
 	useEffect(() => {
 		if(initOverlay) {
 			const overlays = Array.from(document.querySelectorAll('.overlay'))
-			if (overlays.length) {
-				for (const overlay of overlays) {
-					overlay.addEventListener('click', () => {
-						if (allImages.length === 18) {
-							overlay.classList.remove('visible')
-							setStart(true)
-						}
-					})
-				}
+			for (const overlay of overlays) {
+				overlay.addEventListener('click', () => {
+					if (allImages.length === 2*numRobots) {
+						overlay.classList.remove('visible')
+						setStart(true)
+					}
+				})
 			}
 		}
 	}, [initOverlay]);
@@ -220,7 +224,7 @@ function App() {
 	return (!robots.length ? <h1> Loading </h1> :
 			<div>
 				<Header seconds={seconds} totalClicks={totalClicks} />
-				<Welcome />
+				<Welcome loadingImages={loadingImages} />
 				<Scroll >
 					<ErrorBoundary>
 						<CardList robots={robots} />

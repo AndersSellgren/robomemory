@@ -1,13 +1,16 @@
 import React from 'react';
 import './Overlay.css'
 
-function Welcome() {
+function Welcome({ loadingImages }) {
   return (
     <div className={'overlay visible'}>
         <div className={'overlay-text'}> 
-          <h1> Welcome! </h1>
-          <br></br>
-          <h2> Click here to start! </h2>
+          {loadingImages ? <div style={{"display": "flex", "justifyContent" : "center", "alignItems": "center"}}><h2> Loading </h2><div class="lds-hourglass"></div> </div>:
+          <div>
+            <h1> Welcome! </h1>
+            <h2> Click here to start! </h2>
+          </div>
+          }
         </div>
     </div> 
   )
