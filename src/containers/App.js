@@ -179,8 +179,8 @@ function App() {
 				}
 				setCards(cardsArray)
 			}
-			robots.forEach(async (robot) => {
-				await loadImage(`https://robohash.org/set_set1/${robot.pid}?size=150x150`) 
+			robots.forEach((robot) => {
+				loadImage(`https://robohash.org/set_set1/${robot.pid}?size=150x150`) 
 				.then(img => allImages.push(img))
 				.catch(_ => loadImage(`../components/images/tinified/default${robot.id}.png`)
 				.then(img => allImages.push(img))
