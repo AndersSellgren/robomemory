@@ -27,13 +27,22 @@
 }
 
 .hideCards {
-  animation: overlay-grow-shrink 1500ms forwards;
+  animation: cards-hide-show 1000ms forwards;
 }
 
-@keyframes overlay-grow-shrink {
+@keyframes cards-hide-show {
   0% {
+    opacity: 1;
+  }
+
+  40% {
     opacity: 0;
   }
+
+  60% {
+    opacity: 0;
+  }
+
   100% {
     opacity: 1;
   }
