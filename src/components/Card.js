@@ -4,13 +4,13 @@ import defaultImages from "./defaultImages";
 import './Card.css'
 import './Overlay.css'
 
-function Card({ username, pid, id, cardWidth, cardHeight }) {
+function Card({ username, pid, id, cardHeight }) {
 
 	// console.log(cardHeight)
-	const cardHeight1 = Math.round(0.8*cardHeight)
+	const imageSize = Math.round(0.8*cardHeight)
 	// const cardWidth1 = 0.6*cardWidth
 
-	let srcImg = `https://robohash.org/set_set1/${pid}?size=${cardHeight1}x${cardHeight1}`	
+	let srcImg = `https://robohash.org/set_set1/${pid}?size=${imageSize}x${imageSize}`	
 
 	const getDefaultImg = (event) => {
 		event.target.setAttribute("src", defaultImages[id-1])
@@ -24,7 +24,7 @@ function Card({ username, pid, id, cardWidth, cardHeight }) {
 			<div className="card-front card-face">
 				<img className="card-value" onError= { (event) => getDefaultImg(event) } src={ srcImg } alt = { `./images/tinified/default${id}.png` } />
 				{
-					cardHeight > 110 ? <h3 className="name"> {username.substring(0,8)} </h3> :
+					cardHeight > 110 ? <h4 className="name"> {username.substring(0,8)} </h4> :
 					<h6 className="name"> {username.substring(0,8)} </h6>
 				}
 				

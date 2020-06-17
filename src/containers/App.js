@@ -7,6 +7,8 @@ import Welcome from '../components/Welcome';
 import Scroll from '../components/Scroll';
 import ErrorBoundary from './ErrorBoundary'
 import Header from '../components/Header'
+import preLoadRobots from '../components/loadRobots'
+import {animationCards, victory} from './animation'
 import useWindowDimensions from '../components/WindowSize';
 import './App.css'
 
@@ -28,14 +30,22 @@ function App() {
 	// These states are used in rendering => changes of 
 	// these should result in rendering
 	const [robots, setRobots] = useState([]);
-	const [seconds, setSeconds] = useState(0)
 	const [totalClicks, setTotalClicks] = useState(0)
 	const [initOverlay, setInitOverlay] = useState(false)
-	const [loadingImages, setLoadingImages] = useState(true)
-	
-	const { height } = useWindowDimensions();
-	// const cardWidth = Math.round(0.12 * width)
+	const [imagesLoading, setImagesLoading] = useState(true)
+
+	// const { innerHeight: height } = window;
+	const { width, height } = useWindowDimensions();
 	const cardHeight = Math.round(0.25 * height)
+
+	if (window.matchMedia("(orientation: portrait)").matches) {
+		console.log("you're in PORTRAIT mode")
+ 	}
+ 
+ 	if (window.matchMedia("(orientation: landscape)").matches) {
+		console.log("you're in LANDSCAPE mode")
+ 	}
+
 
 	const showCards = () => {
 		cards.forEach(card => card.classList.add('visible'))
@@ -50,6 +60,7 @@ function App() {
 			cards[i].style.order = i+1;
 		}
 	}
+	
 
 	const shuffleCards = () => {
 		for (let i =0; i < cards.length; i++) {
@@ -61,22 +72,6 @@ function App() {
 			cards[randIndex].style.order = cards[i].style.order;
 			cards[i].style.order = temp;
 		}
-	}
-
-	const animationCards = () => {
-		const cardValues = document.querySelectorAll('.card-back')
-		setTimeout(() => {
-			[...cardValues].map(card => card.classList.add('hideCards'))
-		},2000)
-		setTimeout(() => {
-			[...cardValues].map(card => card.classList.remove('hideCards'))
-		},3000)
-	}
-
-	const victory = () => {
-		const overlayVictory = document.querySelector('.overlay.victory')
-		overlayVictory.classList.add('visible')
-		// setNewRobots(true)
 	}
 
 	const cardMatch = (card1, card2) => {
@@ -135,22 +130,6 @@ function App() {
 		}
 	}
 
-	const startGame = () => {
-		setSeconds(0)
-		setTotalClicks(0)
-		showCards()
-		unShuffleCards()
-		setNewRobots(false)
-		busy.current = true;
-		setTimeout(() => {
-			// this.audioController.startMusic();
-			shuffleCards();
-			busy.current = false;
-		}, 2500);
-		setTimeout(() => hideCards(), 2000);
-		animationCards()
-	}
-
 
 	useEffect(() => {
 		if (newRobots) {
@@ -161,16 +140,7 @@ function App() {
 			setRobots(robotToLoad)
 		}
 	}, [newRobots])
-
-
-	function loadImage(src) {
-		return new Promise((resolve, reject) => {
-			const img = new Image();
-			img.addEventListener("load", () => resolve(img));
-			img.addEventListener("error", (err) => reject(err));
-			img.src = src;
-		});
-	};
+	
 
 	useEffect(() => {
 		if (robots.length) {
@@ -184,17 +154,9 @@ function App() {
 				}
 				setCards(cardsArray)
 			}
-			
-			robots.forEach((robot) => {
-				loadImage(`https://robohash.org/set_set1/${robot.pid}?size=${cardHeight}x${cardHeight}`)
-				.then(img => allImages.push(img))
-				.catch(err => allImages.push(err))
-				.finally(() => {
-					if(allImages.length === 2*numRobots) {
-						setLoadingImages(false)
-					}
-				})
-			})	
+
+			preLoadRobots(robots , allImages, cardHeight, setImagesLoading, numRobots)
+				
 			setInitOverlay(true)
 		}
 	}, [robots]);
@@ -218,24 +180,33 @@ function App() {
 			startGame()
 	}, [start])
 
-  useEffect(() => {
-		const timer = setInterval(() => {
-			setSeconds(seconds => seconds + step);
-		}, 1000);
-		// componentDidUnmount right before the second call
-		return () => clearInterval(timer)
-  }, [step]);
+  const startGame = () => {
+		setTotalClicks(0)
+		showCards()
+		unShuffleCards()
+		setNewRobots(false)
+		busy.current = true;
+		setTimeout(() => {
+			// this.audioController.startMusic();
+			shuffleCards();
+			busy.current = false;
+		}, 2500);
+		setTimeout(() => hideCards(), 2000);
+		animationCards()
+	}
 
 	return (!robots.length ? <h1> Loading </h1> :
 			<div>
-				<Header seconds={seconds} totalClicks={totalClicks} cardHeight={cardHeight}/>
-				<Welcome loadingImages={loadingImages} />
+				{width > height ?
+				<Header step={step} totalClicks={totalClicks} width={width} /> : null
+				}
+				<Welcome imagesLoading={imagesLoading} width={width} height={height}/>
 				<Scroll >
 					<ErrorBoundary>
 						<CardList robots={robots} cardHeight={cardHeight} />
 					</ErrorBoundary>
 				</Scroll>
-				<Victory seconds={seconds} totalClicks={totalClicks}/>
+				<Victory totalClicks={totalClicks}/>
 			</div>
 	)
 };

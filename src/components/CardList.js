@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 // import './CardList.css'
 
-function CardList({robots,cardWidth,cardHeight}) {
+function CardList({robots,cardHeight}) {
 	// const counter = useRef(0)
 
 	const divStyle = () =>  ({
@@ -10,7 +10,7 @@ function CardList({robots,cardWidth,cardHeight}) {
 		display: 'grid',
 		justifyContent: 'center',
 		gridTemplateColumns: `repeat(6, ${cardHeight*0.75}px)`,
-		gridTemplateRows: `${cardHeight}px ${cardHeight}px ${cardHeight}px`,
+		gridTemplateRows: `repeat(3, ${cardHeight}px`,
 		gridGap: `${cardHeight*0.1}px`,
 		/* margin: '1em' */
 	})
@@ -25,7 +25,6 @@ function CardList({robots,cardWidth,cardHeight}) {
 							username={robot.username} 
 							pid = {robot.pid}
 							cardHeight={cardHeight}
-							cardWidth={cardWidth}
 							// counter = {counter}
 							/>
 					)

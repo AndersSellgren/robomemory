@@ -9,21 +9,11 @@
   align-items: center;
   z-index: -100;
 }
+
 .overlay.visible {
   display: flex;
   z-index: 100;
   animation: overlay-grow 500ms forwards;
-}
-
-@keyframes overlay-grow {
-  0% {
-    background-color: rgba(0, 0, 0, 0);
-    font-size: 0;
-  }
-  100% {
-    background-color: rgba(0, 0, 0, .8);
-    font-size: 2em;
-  }
 }
 
 .hideCards {
@@ -48,18 +38,56 @@
   }
 }
 
-.overlay-text {
-  display: 'flex';
-  align-items: center;
-  background-color: rgba(38, 117, 141, 0.75);
-  text-align: center;
-  margin: 20px;
-  margin-bottom: 20vh;
-  z-index: 100;
-  padding: 1em;
-  border-radius: 2em;
+@media only screen and (orientation:landscape) {
+  @keyframes overlay-grow {
+    0% {
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 0;
+    }
+    100% {
+      background-color: rgba(0, 0, 0, 0.8);
+      font-size: 4em;
+    }
+  }
+
+  .overlay-text {
+    display: 'flex';
+    align-items: center;
+    background-color: rgba(38, 117, 141, 0.75);
+    text-align: center;
+    margin: 20px;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    z-index: 100;
+    padding: 1rem;
+    border-radius: 2rem;
+  }
 }
 
+@media only screen and (orientation:portrait) {
+  @keyframes overlay-grow {
+    0% {
+      background-color: rgba(0, 0, 0, 0);
+      font-size: 0;
+    }
+    100% {
+      background-color: rgba(0, 0, 0, 1);
+      font-size: 2rem;
+    }
+  }
+
+  .overlay-text {
+    display: 'flex';
+    align-items: center;
+    background-color: rgba(38, 117, 141, 0.75);
+    text-align: center;
+    margin: 20px;
+    margin-bottom: 20vh;
+    z-index: 100;
+    padding: 1rem;
+    border-radius: 2rem;
+  }
+}
 
 .lds-hourglass {
   display: inline-block;

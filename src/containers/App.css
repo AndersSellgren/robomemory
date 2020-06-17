@@ -5,35 +5,81 @@
     src: url('NiseSega Cyrillic.ttf');
 }
 
-div h1 {
-    font-family: "NiseSega";
-    font-size: 3em;
-    margin: 0;
-    padding: 0;
-}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 900px) {
+    
+    div h1 {
+        font-family: "NiseSega";
+        font-size: 2rem;
+        margin: 10px;
+        padding: 0;
+    }
 
-h2 {
-    font-family: 'NiseSega';
-    line-height: 10vh;
-    font-size: 2em;
-    margin: 10px;
-    padding: 0;
-}
+    h2 {
+        font-family: 'NiseSega';
+        font-size: 1.75rem;
+        margin: 10px;
+        padding: 0;
+    }
 
-div h4 {
-    font-family: "NiseSega";
-    line-height: 10vh;
-    font-size: 1.2em;
-    margin: 2px;
-    padding: 0;
-}
+    div h3 {
+        font-family: "NiseSega";
+        font-size: 1.5rem;
+        margin: 2px;
+        padding: 0;
+    }
 
-h5 {
-    font-family: 'NiseSega';
-    line-height: 10vh;
-    font-size: 1em;
-    margin: 2px;
-    padding: 0;
+    div h4 {
+        font-family: "NiseSega";
+        font-size: 1.25rem;
+        margin: 2px;
+        padding: 0;
+    }
+
+    h5 {
+        font-family: 'NiseSega';
+        font-size: 1rem;
+        margin: 2px;
+        padding: 0;
+    }
+} 
+
+@media only screen and (min-width: 900px) {
+    
+    div h1 {
+        font-family: "NiseSega";
+        font-size: 4rem;
+        margin: 10px;
+        padding: 0;
+    }
+
+    h2 {
+        font-family: 'NiseSega';
+        font-size: 3rem;
+        margin: 10px;
+        padding: 0;
+    }
+
+    h3 {
+        font-family: 'NiseSega';
+        font-size: 2rem;
+        margin: 5px;
+        padding: 0;
+    }
+
+    h4 {
+        font-family: "NiseSega";
+        font-size: 1.5rem;
+        margin: 2px;
+        padding: 0;
+    }
+
+    h5 {
+        font-family: 'NiseSega';
+        font-size: 1rem;
+        margin: 2px;
+        padding: 0;
+    }
 }
 
 
