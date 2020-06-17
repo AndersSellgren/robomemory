@@ -7,6 +7,7 @@ import Welcome from '../components/Welcome';
 import Scroll from '../components/Scroll';
 import ErrorBoundary from './ErrorBoundary'
 import Header from '../components/Header'
+import useWindowDimensions from '../components/WindowSize';
 import './App.css'
 
 export var allImages = [];
@@ -32,6 +33,9 @@ function App() {
 	const [initOverlay, setInitOverlay] = useState(false)
 	const [loadingImages, setLoadingImages] = useState(true)
 	
+	const { height } = useWindowDimensions();
+	// const cardWidth = Math.round(0.12 * width)
+	const cardHeight = Math.round(0.25 * height)
 
 	const showCards = () => {
 		cards.forEach(card => card.classList.add('visible'))
@@ -180,8 +184,9 @@ function App() {
 				}
 				setCards(cardsArray)
 			}
+			
 			robots.forEach((robot) => {
-				loadImage(`https://robohash.org/set_set1/${robot.pid}?size=150x150`) 
+				loadImage(`https://robohash.org/set_set1/${robot.pid}?size=${cardHeight}x${cardHeight}`)
 				.then(img => allImages.push(img))
 				.catch(err => allImages.push(err))
 				.finally(() => {
@@ -223,11 +228,11 @@ function App() {
 
 	return (!robots.length ? <h1> Loading </h1> :
 			<div>
-				<Header seconds={seconds} totalClicks={totalClicks} />
+				<Header seconds={seconds} totalClicks={totalClicks} cardHeight={cardHeight}/>
 				<Welcome loadingImages={loadingImages} />
 				<Scroll >
 					<ErrorBoundary>
-						<CardList robots={robots} />
+						<CardList robots={robots} cardHeight={cardHeight} />
 					</ErrorBoundary>
 				</Scroll>
 				<Victory seconds={seconds} totalClicks={totalClicks}/>

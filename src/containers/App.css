@@ -13,8 +13,27 @@ div h1 {
 }
 
 h2 {
+    font-family: 'NiseSega';
     line-height: 10vh;
     font-size: 2em;
     margin: 10px;
     padding: 0;
 }
+
+div h4 {
+    font-family: "NiseSega";
+    line-height: 10vh;
+    font-size: 1.2em;
+    margin: 2px;
+    padding: 0;
+}
+
+h5 {
+    font-family: 'NiseSega';
+    line-height: 10vh;
+    font-size: 1em;
+    margin: 2px;
+    padding: 0;
+}
+
+

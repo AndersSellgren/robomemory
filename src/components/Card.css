@@ -11,6 +11,14 @@ h3 {
   font-size: 1.2em;
 }
 
+h6 {
+  color: #111;
+	margin: 0rem;
+  padding: 3px;
+  font-family: "NiseSega",'Roboto', sans-serif;
+  font-size: 0.7em;
+}
+
 p {
 	color: white;
 }
