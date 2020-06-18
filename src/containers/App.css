@@ -42,6 +42,13 @@
         margin: 2px;
         padding: 0;
     }
+
+    h6 {
+        font-family: 'NiseSega';
+        font-size: 0.75rem;
+        margin: 2px;
+        padding: 0;
+    }
 } 
 
 @media only screen and (min-width: 900px) {
@@ -76,7 +83,14 @@
 
     h5 {
         font-family: 'NiseSega';
-        font-size: 1rem;
+        font-size: 1.25rem;
+        margin: 2px;
+        padding: 0;
+    }
+
+    h6 {
+        font-family: 'NiseSega';
+        font-size: 1.125rem;
         margin: 2px;
         padding: 0;
     }

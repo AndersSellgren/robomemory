@@ -10,6 +10,8 @@ function Scroll(props) {
 
 const divStyle = {
 	boxSizing: 'border-box', 
+	display: 'flex',
+	justifyContent: 'center',
 	padding: '10px', 
 	overflowY: 'auto', 
 	border: '5px solid black', 

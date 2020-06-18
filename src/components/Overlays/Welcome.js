@@ -1,5 +1,5 @@
 import React from 'react';
-import './Overlay.css'
+import './Overlays.css'
 
 function Welcome({ imagesLoading,width,height }) {
   // console.log(width)

@@ -13,7 +13,7 @@
 .overlay.visible {
   display: flex;
   z-index: 100;
-  animation: overlay-grow 500ms forwards;
+  animation: overlay-grow 1000ms forwards;
 }
 
 .hideCards {
@@ -45,7 +45,7 @@
       font-size: 0;
     }
     100% {
-      background-color: rgba(0, 0, 0, 0.8);
+      background-color: rgba(0, 0, 0, 0.75);
       font-size: 4em;
     }
   }
@@ -59,7 +59,7 @@
     margin-top: 10vh;
     margin-bottom: 10vh;
     z-index: 100;
-    padding: 1rem;
+    padding: 2rem;
     border-radius: 2rem;
   }
 }

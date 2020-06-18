@@ -1,5 +1,5 @@
 import React from 'react';
-import './Overlay.css'
+import './Overlays.css'
 
 function Victory({totalClicks}) {
   const seconds = document.getElementById("seconds")

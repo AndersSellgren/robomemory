@@ -1,35 +1,9 @@
-h2 {
-  font-weight:700;
-  font-family: 'NiseSega', 'Roboto', sans-serif;
-}
-
-h3 {
-  color: #111;
-	margin: 0rem;
-  padding: 10px;
-  font-family: "NiseSega",'Roboto', sans-serif;
-  font-size: 1.2em;
-}
-
-h6 {
-  color: #111;
-	margin: 0rem;
-  padding: 3px;
-  font-family: "NiseSega",'Roboto', sans-serif;
-  font-size: 0.7em;
-}
-
-p {
-	color: white;
-}
-
 .card {
   position: relative;
 	/* display: flex; */
 	justify-content: center;
   height: 100%;
 	width: 100%;
-  /* margin: 0.2em; */
 }
 
 .card-face {
@@ -37,7 +11,6 @@ p {
   width: 100%;
   height: 100%;
   background-color: #111;
-	/* margin: 0.5em; */
 	text-align: center;
 	border-radius: 1em;
 	overflow: hidden;
@@ -45,12 +18,10 @@ p {
 	transition: transform 200ms ease-in-out;
 }
 .card.visible .card-back {
-  /* visibility: visible; */
   transform: rotateY(180deg);
 }
 
 .card.visible .card-front {
-  /* visibility: visible; */
   transform: rotateY(0)
 }
 
@@ -63,9 +34,16 @@ p {
 
 .card-front {
   background-color: #ddd;
-  /* border-color: #333; */
   border: 0.1em solid #111;
   transform: rotateY(180deg);
+}
+
+h4.name {
+  line-height: 1.5rem;
+}
+
+h6.name {
+  line-height: 1rem;
 }
 
 .grows { transition: all 75ms linear; }

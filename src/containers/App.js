@@ -1,22 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useRef, useEffect} from 'react';
 import CardList from '../components/CardList';
-import { robotNames } from './robots';
-import Victory from '../components/Victory';
-import Welcome from '../components/Welcome';
+import Victory from '../components/Overlays/Victory';
+import Welcome from '../components/Overlays/Welcome';
 import Scroll from '../components/Scroll';
 import ErrorBoundary from './ErrorBoundary'
 import Header from '../components/Header'
-import preLoadRobots from '../components/loadRobots'
-import {animationCards, victory} from './animation'
 import useWindowDimensions from '../components/WindowSize';
+import { openFullscreen } from './fullscreen'
+import { robotNames, preLoadRobots, animationCards, victory } from '../helpers'
 import './App.css'
 
 export var allImages = [];
 
 function App() {
 	// constant
-	const numRobots = 9
+	const numRobots = 2
 	// variables that requires synchronized updates and 
 	// should not cause a rendering
 	const cardToCheck = useRef(null);
@@ -33,19 +32,19 @@ function App() {
 	const [totalClicks, setTotalClicks] = useState(0)
 	const [initOverlay, setInitOverlay] = useState(false)
 	const [imagesLoading, setImagesLoading] = useState(true)
+	const [seconds, setSeconds] = useState(0)
 
 	// const { innerHeight: height } = window;
 	const { width, height } = useWindowDimensions();
 	const cardHeight = Math.round(0.25 * height)
 
-	if (window.matchMedia("(orientation: portrait)").matches) {
-		console.log("you're in PORTRAIT mode")
- 	}
+	// if (window.matchMedia("(orientation: portrait)").matches) {
+	// 	console.log("you're in PORTRAIT mode")
+ 	// }
  
- 	if (window.matchMedia("(orientation: landscape)").matches) {
-		console.log("you're in LANDSCAPE mode")
- 	}
-
+ 	// if (window.matchMedia("(orientation: landscape)").matches) {
+	// 	console.log("you're in LANDSCAPE mode")
+ 	// }
 
 	const showCards = () => {
 		cards.forEach(card => card.classList.add('visible'))
@@ -61,7 +60,6 @@ function App() {
 		}
 	}
 	
-
 	const shuffleCards = () => {
 		for (let i =0; i < cards.length; i++) {
 			cards[i].style.order = i+1;
@@ -168,6 +166,7 @@ function App() {
 				overlay.addEventListener('click', () => {
 					if (allImages.length === 2*numRobots) {
 						overlay.classList.remove('visible')
+						setSeconds(0)
 						setStart(true)
 					}
 				})
@@ -176,12 +175,23 @@ function App() {
 	}, [initOverlay]);
 
 	useEffect(() => {
+		const timer = setInterval(() => {
+			setSeconds(seconds => seconds + step);
+		}, 1000);
+		// componentDidUnmount right before the second call
+		return () => clearInterval(timer)
+  }, [step]);
+
+	useEffect(() => {
 		if(start) 
 			startGame()
 	}, [start])
 
   const startGame = () => {
+		// const seconds = document.getElementById("seconds")
+		openFullscreen()
 		setTotalClicks(0)
+		// seconds.innerText = 0
 		showCards()
 		unShuffleCards()
 		setNewRobots(false)
@@ -198,7 +208,7 @@ function App() {
 	return (!robots.length ? <h1> Loading </h1> :
 			<div>
 				{width > height ?
-				<Header step={step} totalClicks={totalClicks} width={width} /> : null
+				<Header step={step} totalClicks={totalClicks} width={width} seconds={seconds} /> : null
 				}
 				<Welcome imagesLoading={imagesLoading} width={width} height={height}/>
 				<Scroll >
