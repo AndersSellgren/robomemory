@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/robomemory/static/css/main.4e81e0a5.chunk.css",
-    "main.js": "/robomemory/static/js/main.e6534c67.chunk.js",
-    "main.js.map": "/robomemory/static/js/main.e6534c67.chunk.js.map",
+    "main.css": "/robomemory/static/css/main.f9e7e2cc.chunk.css",
+    "main.js": "/robomemory/static/js/main.3df527d8.chunk.js",
+    "main.js.map": "/robomemory/static/js/main.3df527d8.chunk.js.map",
     "runtime-main.js": "/robomemory/static/js/runtime-main.4059e67f.js",
     "runtime-main.js.map": "/robomemory/static/js/runtime-main.4059e67f.js.map",
     "static/css/2.3b6f1bda.chunk.css": "/robomemory/static/css/2.3b6f1bda.chunk.css",
-    "static/js/2.89f9a6a0.chunk.js": "/robomemory/static/js/2.89f9a6a0.chunk.js",
-    "static/js/2.89f9a6a0.chunk.js.map": "/robomemory/static/js/2.89f9a6a0.chunk.js.map",
+    "static/js/2.00b99464.chunk.js": "/robomemory/static/js/2.00b99464.chunk.js",
+    "static/js/2.00b99464.chunk.js.map": "/robomemory/static/js/2.00b99464.chunk.js.map",
     "index.html": "/robomemory/index.html",
-    "precache-manifest.88938eee127231003e1e11f4b54c4092.js": "/robomemory/precache-manifest.88938eee127231003e1e11f4b54c4092.js",
+    "precache-manifest.342a310f12a9b7682d61d5e6c53b707b.js": "/robomemory/precache-manifest.342a310f12a9b7682d61d5e6c53b707b.js",
     "service-worker.js": "/robomemory/service-worker.js",
     "static/css/2.3b6f1bda.chunk.css.map": "/robomemory/static/css/2.3b6f1bda.chunk.css.map",
-    "static/css/main.4e81e0a5.chunk.css.map": "/robomemory/static/css/main.4e81e0a5.chunk.css.map",
-    "static/js/2.89f9a6a0.chunk.js.LICENSE.txt": "/robomemory/static/js/2.89f9a6a0.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/robomemory/static/media/NiseSega Cyrillic.f4791adf.ttf",
+    "static/css/main.f9e7e2cc.chunk.css.map": "/robomemory/static/css/main.f9e7e2cc.chunk.css.map",
+    "static/js/2.00b99464.chunk.js.LICENSE.txt": "/robomemory/static/js/2.00b99464.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/robomemory/static/media/NiseSega Cyrillic.f4791adf.ttf",
     "static/media/default1.png": "/robomemory/static/media/default1.ac6d699b.png",
     "static/media/default2.png": "/robomemory/static/media/default2.e305add1.png",
     "static/media/default3.png": "/robomemory/static/media/default3.2a586e79.png",
@@ -28,8 +28,8 @@
   "entrypoints": [
     "static/js/runtime-main.4059e67f.js",
     "static/css/2.3b6f1bda.chunk.css",
-    "static/js/2.89f9a6a0.chunk.js",
-    "static/css/main.4e81e0a5.chunk.css",
-    "static/js/main.e6534c67.chunk.js"
+    "static/js/2.00b99464.chunk.js",
+    "static/css/main.f9e7e2cc.chunk.css",
+    "static/js/main.3df527d8.chunk.js"
   ]
 }
