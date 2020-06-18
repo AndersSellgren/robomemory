@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0f90385ed47e5c5d1c6d2cf17a95d7f2",
+    "revision": "bccfe124bba96f9ce9fe23ba7d712254",
     "url": "/robomemory/index.html"
   },
   {
-    "revision": "56cce15c7b6fc9a74fe9",
+    "revision": "9e4da1499ad708837e34",
     "url": "/robomemory/static/css/2.3b6f1bda.chunk.css"
   },
   {
-    "revision": "7da9f7d288a515257758",
-    "url": "/robomemory/static/css/main.e13e401f.chunk.css"
+    "revision": "c3081301a525696341f1",
+    "url": "/robomemory/static/css/main.38e9445e.chunk.css"
   },
   {
-    "revision": "56cce15c7b6fc9a74fe9",
-    "url": "/robomemory/static/js/2.24bffd05.chunk.js"
+    "revision": "9e4da1499ad708837e34",
+    "url": "/robomemory/static/js/2.89f9a6a0.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/robomemory/static/js/2.24bffd05.chunk.js.LICENSE.txt"
+    "url": "/robomemory/static/js/2.89f9a6a0.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "7da9f7d288a515257758",
-    "url": "/robomemory/static/js/main.5c1e3b56.chunk.js"
+    "revision": "c3081301a525696341f1",
+    "url": "/robomemory/static/js/main.757ca334.chunk.js"
   },
   {
     "revision": "c5d653f1a909981691d6",
