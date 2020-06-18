@@ -35,7 +35,14 @@ function App() {
 
 	// const { innerHeight: height } = window;
 	const { width, height } = useWindowDimensions();
-	const cardHeight = Math.round(0.25 * height)
+
+	let cardHeight = Math.round(0.25 * height)
+	
+	if (width < height) {
+		cardHeight = Math.round(0.25 * width)
+	}
+
+	
 
 	const showCards = () => {
 		cards.forEach(card => card.classList.add('visible'))
@@ -195,11 +202,9 @@ function App() {
 
 	return (!robots.length ? <h1> Loading </h1> :
 			<div>
-				{width > height ?
-				<Header step={step} totalClicks={totalClicks} width={width} seconds={seconds} /> : null
-				}
+				<Header totalClicks={totalClicks} seconds={seconds} width={width} height={height}  /> 
 				<Welcome imagesLoading={imagesLoading} width={width} height={height}/>
-				<Scroll >
+				<Scroll width={width} height={height}>
 					<ErrorBoundary>
 						<CardList robots={robots} cardHeight={cardHeight} />
 					</ErrorBoundary>

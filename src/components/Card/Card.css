@@ -12,7 +12,7 @@
   height: 100%;
   background-color: #111;
 	text-align: center;
-	border-radius: 1em;
+	border-radius: 0.5rem;
 	overflow: hidden;
 	backface-visibility: hidden;
 	transition: transform 200ms ease-in-out;
