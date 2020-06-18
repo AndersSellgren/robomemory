@@ -3,11 +3,10 @@ import React, {useState, useRef, useEffect} from 'react';
 import CardList from '../components/CardList';
 import Victory from '../components/Overlays/Victory';
 import Welcome from '../components/Overlays/Welcome';
-import Scroll from '../components/Scroll';
+import Scroll from './Scroll';
 import ErrorBoundary from './ErrorBoundary'
 import Header from '../components/Header'
 import useWindowDimensions from '../components/WindowSize';
-import { openFullscreen } from './fullscreen'
 import { robotNames, preLoadRobots, animationCards, victory } from '../helpers'
 import './App.css'
 
@@ -15,7 +14,7 @@ export var allImages = [];
 
 function App() {
 	// constant
-	const numRobots = 2
+	const numRobots = 9
 	// variables that requires synchronized updates and 
 	// should not cause a rendering
 	const cardToCheck = useRef(null);
@@ -37,14 +36,6 @@ function App() {
 	// const { innerHeight: height } = window;
 	const { width, height } = useWindowDimensions();
 	const cardHeight = Math.round(0.25 * height)
-
-	// if (window.matchMedia("(orientation: portrait)").matches) {
-	// 	console.log("you're in PORTRAIT mode")
- 	// }
- 
- 	// if (window.matchMedia("(orientation: landscape)").matches) {
-	// 	console.log("you're in LANDSCAPE mode")
- 	// }
 
 	const showCards = () => {
 		cards.forEach(card => card.classList.add('visible'))
@@ -188,10 +179,7 @@ function App() {
 	}, [start])
 
   const startGame = () => {
-		// const seconds = document.getElementById("seconds")
-		openFullscreen()
 		setTotalClicks(0)
-		// seconds.innerText = 0
 		showCards()
 		unShuffleCards()
 		setNewRobots(false)

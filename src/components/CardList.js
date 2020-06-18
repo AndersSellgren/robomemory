@@ -3,7 +3,6 @@ import Card from './Card/Card';
 // import './CardList.css'
 
 function CardList({robots,cardHeight}) {
-	// const counter = useRef(0)
 
 	const divStyle = () =>  ({
 		gridColumn: '1 / -1',
