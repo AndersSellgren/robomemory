@@ -12,16 +12,16 @@ function Header({ totalClicks, seconds, width, height }) {
   );
 }
 
-const divS = () => {
+const divS = (width,height) => {
   let divStyle = {
     display: 'grid',
     gridTemplateColumns: '17% 8% 50% 17% 8%',
   }
   
-  if(window.innerHeight < window.innerWidth) {
-    divStyle = {...divStyle, height: '10vh', lineHeight: '10vh'}
+  if(width > height) {
+    divStyle = {...divStyle, height: '10vh', width: '100vw', lineHeight: '10vh'}
   } else {
-    divStyle = {...divStyle, height: '10vw', lineHeight: '10vw'}
+    divStyle = {...divStyle, height: '10vw', width: '88vh', lineHeight: '10vw'}
   }
   return divStyle
 }

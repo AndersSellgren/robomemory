@@ -13,15 +13,14 @@ const divS = (width, height) => {
 		boxSizing: 'border-box', 
 		display: 'flex',
 		justifyContent: 'center',
-		padding: '10px', 
-		overflowY: 'auto', 
+		padding: '10px',  
 		border: '5px solid black',  
 		zIndex:'1'
 	}
 	if(height < width){
-		divStyle = {...divStyle, height: '100vh', width: '100vw'}
+		divStyle = {...divStyle, height: '90vh', width: '100vw'}
 	} else {
-		divStyle = {...divStyle, height: '100vw', width: '100vh'}
+		divStyle = {...divStyle, height: '90vw', width: '88vh'}
 	}
 
 	return divStyle
