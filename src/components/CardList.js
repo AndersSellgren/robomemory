@@ -1,8 +1,11 @@
 import React from 'react';
 import Card from './Card/Card';
+import { calcCardHeight } from '../helpers'
 // import './CardList.css'
 
-function CardList({robots,cardHeight}) {
+function CardList({robots,width,height}) {
+
+	const cardHeight = calcCardHeight(width, height)
 
 	const divStyle = () =>  ({
 		gridColumn: '1 / -1',

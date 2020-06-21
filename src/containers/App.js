@@ -6,7 +6,7 @@ import Welcome from '../components/Overlays/Welcome';
 import Scroll from './Scroll';
 import ErrorBoundary from './ErrorBoundary'
 import Header from '../components/Header'
-import useWindowDimensions from '../components/WindowSize';
+// import useWindowDimensions from '../components/WindowSize';
 import { robotNames, preLoadRobots, animationCards, victory } from '../helpers'
 import './App.css'
 
@@ -33,16 +33,18 @@ function App() {
 	
 	const [initOverlay, setInitOverlay] = useState(false)
 	const [imagesLoading, setImagesLoading] = useState(true)
-
-	// const { innerHeight: height } = window;
-	const { width, height } = useWindowDimensions();
+	const [width, setWidth] = useState(window.innerWidth)
+	const [height, setHeight] = useState(window.innerHeight);
 	
-	let cardHeight = Math.round(0.22 * height)
+	useEffect(() => {
+		function handleResize() {
+			setWidth(window.innerWidth);
+			setHeight(window.innerHeight);
+		}
+	  window.addEventListener('resize', handleResize)
+		return () => window.removeEventListener('resize', handleResize);
+  },[])
 	
-	if (width < height) {
-		cardHeight = Math.round(0.22 * width)
-	}
-
 	const showCards = () => {
 		cards.forEach(card => card.classList.add('visible'))
 	}
@@ -122,7 +124,7 @@ function App() {
 		}
 	}
 
-
+	
 	useEffect(() => {
 		if (newRobots) {
 			const robotToLoad = robotNames.slice(0,numRobots).flatMap(robot => {
@@ -147,7 +149,7 @@ function App() {
 				setCards(cardsArray)
 			}
 
-			preLoadRobots(robots , allImages, cardHeight, setImagesLoading, numRobots)
+			preLoadRobots(robots , allImages, 100, setImagesLoading, numRobots)
 			setInitOverlay(true)
 		}
 	}, [robots]);
@@ -194,7 +196,7 @@ function App() {
 				<Welcome imagesLoading={imagesLoading} width={width} height={height}/>
 				<Scroll width={width} height={height}>
 					<ErrorBoundary>
-						<CardList robots={robots} cardHeight={cardHeight} />
+						<CardList robots={robots} width={width} height={height} />
 					</ErrorBoundary>
 				</Scroll>
 				<Victory totalClicks={totalClicks}/>

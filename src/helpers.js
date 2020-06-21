@@ -14,6 +14,14 @@ export const victory = () => {
   // setNewRobots(true)
 }
 
+export const calcCardHeight = (width, height) => {
+  if (width < height) {
+    return Math.round(0.22 * width)
+  } else {
+    return Math.round(0.22 * height)
+  }
+}
+
 function loadImage(src) {
   return new Promise((resolve, reject) => {
     const img = new Image();
