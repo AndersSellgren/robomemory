@@ -10,8 +10,7 @@ function CardList({robots,cardHeight}) {
 		justifyContent: 'center',
 		gridTemplateColumns: `repeat(6, ${cardHeight*0.75}px)`,
 		gridTemplateRows: `repeat(3, ${cardHeight}px`,
-		gridGap: `${cardHeight*0.1}px`,
-		/* margin: '1em' */
+		gridGap: `${cardHeight*0.1}px`
 	})
 
 	return (

@@ -25,7 +25,7 @@ function loadImage(src) {
 
 export function preLoadRobots(robots, allImages, cardHeight, setImagesLoading, numRobots) {
   robots.forEach(robot => {
-    loadImage(`https://robohash.org/set_set1/${robot.pid}?size=${cardHeight}x${cardHeight}`)
+    loadImage(`https://robohash.org/set_set1/${robot.pid}?size=${100}x${100}`)
     .then(img => allImages.push(img))
     .catch(err => allImages.push(err))
     .finally(() => {

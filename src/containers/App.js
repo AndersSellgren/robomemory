@@ -20,29 +20,28 @@ function App() {
 	const cardToCheck = useRef(null);
 	const busy = useRef(true)
 	const matchedCards = useRef([])
+
 	// These states should result in rendering
 	const [cards, setCards] = useState([])
-	const [step, setStep] = useState(0)
+	const [reset, setReset] = useState(true)
 	const [start, setStart] = useState(false)
 	const [newRobots, setNewRobots] = useState(true)
+	const [totalClicks, setTotalClicks] = useState(0)
 	// These states are used in rendering => changes of 
 	// these should result in rendering
 	const [robots, setRobots] = useState([]);
-	const [totalClicks, setTotalClicks] = useState(0)
+	
 	const [initOverlay, setInitOverlay] = useState(false)
 	const [imagesLoading, setImagesLoading] = useState(true)
-	const [seconds, setSeconds] = useState(0)
 
 	// const { innerHeight: height } = window;
 	const { width, height } = useWindowDimensions();
-
-	let cardHeight = Math.round(0.25 * height)
+	
+	let cardHeight = Math.round(0.22 * height)
 	
 	if (width < height) {
-		cardHeight = Math.round(0.25 * width)
+		cardHeight = Math.round(0.22 * width)
 	}
-
-	
 
 	const showCards = () => {
 		cards.forEach(card => card.classList.add('visible'))
@@ -72,8 +71,6 @@ function App() {
 
 	const cardMatch = (card1, card2) => {
 		matchedCards.current = [...matchedCards.current,card1,card2];
-		// card1.classList.add('matched');
-		// card2.classList.add('matched');
 		// this.audioController.match();
 	}
 	const cardMisMatch = (card1, card2) => {
@@ -100,7 +97,6 @@ function App() {
 		if (matchedCards.current.length === numRobots*2) {
 			matchedCards.current = []
 			setStart(false)
-			setStep(0)
 			victory(); 
 		}
 	}
@@ -111,11 +107,11 @@ function App() {
 
 	const flipCard = (card) => {
 		if(canFlipCard(card)) {
-			if(step === 0) {
-				setStep(1)
+			if(reset) {
+				setReset(false)
 			}
 			// this.audioController.flip();
-			setTotalClicks((totalClicks) => totalClicks + 1)
+			setTotalClicks(totalClicks => totalClicks + 1)
 			card.classList.add('visible');
 
 			if(cardToCheck.current) {
@@ -152,7 +148,6 @@ function App() {
 			}
 
 			preLoadRobots(robots , allImages, cardHeight, setImagesLoading, numRobots)
-				
 			setInitOverlay(true)
 		}
 	}, [robots]);
@@ -164,7 +159,8 @@ function App() {
 				overlay.addEventListener('click', () => {
 					if (allImages.length === 2*numRobots) {
 						overlay.classList.remove('visible')
-						setSeconds(0)
+						setTotalClicks(0)
+						setReset(true)
 						setStart(true)
 					}
 				})
@@ -173,20 +169,12 @@ function App() {
 	}, [initOverlay]);
 
 	useEffect(() => {
-		const timer = setInterval(() => {
-			setSeconds(seconds => seconds + step);
-		}, 1000);
-		// componentDidUnmount right before the second call
-		return () => clearInterval(timer)
-  }, [step]);
-
-	useEffect(() => {
 		if(start) 
 			startGame()
 	}, [start])
 
   const startGame = () => {
-		setTotalClicks(0)
+		// clicks.current = 0
 		showCards()
 		unShuffleCards()
 		setNewRobots(false)
@@ -202,7 +190,7 @@ function App() {
 
 	return (!robots.length ? <h1> Loading </h1> :
 			<div>
-				<Header totalClicks={totalClicks} seconds={seconds} width={width} height={height}  /> 
+				<Header totalClicks={totalClicks} reset={reset} start={start} width={width} height={height} /> 
 				<Welcome imagesLoading={imagesLoading} width={width} height={height}/>
 				<Scroll width={width} height={height}>
 					<ErrorBoundary>

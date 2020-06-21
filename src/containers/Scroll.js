@@ -26,7 +26,4 @@ const divS = (width, height) => {
 	return divStyle
 }
 
-
-
-
 export default Scroll;

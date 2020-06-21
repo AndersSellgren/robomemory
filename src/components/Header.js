@@ -1,6 +1,23 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
-function Header({ totalClicks, seconds, width, height }) {
+function Header({ reset, start, totalClicks, width, height }) {
+  const [seconds, setSeconds] = useState(0)
+
+  useEffect(() => {
+    let timer = null;
+    if (start && !reset) {
+      timer = setInterval(() => {
+        setSeconds(seconds => seconds + 1);
+      }, 1000);
+    }else if (start && reset) {
+      setSeconds(0)
+    } else if (!start && reset) {
+      clearInterval(timer)
+    } 
+    return () => clearInterval(timer);
+
+  }, [start, reset]);
+
   return (
     <div style={divS(width,height)}>
       <div style={{textAlign:'right'}}><h3>Clicks:</h3></div>
